@@ -11,8 +11,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var _default2 = {
   name: 'VtGenericFilter',
+  inject: ['setRef'],
   components: {
     RLGenericFilter: _RLGenericFilter["default"]
+  },
+  mounted: function mounted() {
+    this.setRef('genericFilter', this.$refs.filter);
   },
   render: function render() {
     var h = arguments[0];

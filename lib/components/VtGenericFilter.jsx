@@ -2,7 +2,11 @@ import RLGenericFilter from "./renderless/RLGenericFilter";
 
 export default {
     name: 'VtGenericFilter',
+    inject: ['setRef'],
     components: {RLGenericFilter},
+    mounted: function mounted() {
+        this.setRef('genericFilter', this.$refs.filter);
+    },
     render() {
         return <r-l-generic-filter scopedSlots={
             {

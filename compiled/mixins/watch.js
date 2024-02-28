@@ -10,7 +10,7 @@ module.exports = {
 
     if (this.opts.resizableColumns) {
       this.$nextTick(function () {
-        (0, _resizeableColumns["default"])(_this.$el.querySelector("table"), _this.hasChildRow, _this.opts.childRowTogglerFirst, _this.resizableColumns, _this.opts.stickyHeader);
+        (0, _resizeableColumns["default"])(_this.refs.table, _this.hasChildRow, _this.opts.childRowTogglerFirst, _this.resizableColumns, _this.opts.stickyHeader);
       });
     }
   }

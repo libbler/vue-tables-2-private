@@ -16,7 +16,7 @@ module.exports = function (query) {
 
           this._setDatepickerText(column, start, end);
         } else {
-          $(this.$el).find("#VueTables__" + $.escapeSelector(column) + "-filter").html("<span class='VueTables__filter-placeholder'>" + this.display('filterBy', {
+          $(this.refs.genericFilter).find("#VueTables__" + $.escapeSelector(column) + "-filter").html("<span class='VueTables__filter-placeholder'>" + this.display('filterBy', {
             column: this.getHeading(column)
           }) + "</span>");
         }
@@ -24,7 +24,7 @@ module.exports = function (query) {
         continue;
       }
 
-      el = this.$el.querySelector("[name='".concat(columnName.replace("'", "\\'"), "']"));
+      el = this.refs.genericFilter.querySelector("[name='".concat(columnName.replace("'", "\\'"), "']"));
 
       if (el) {
         el.value = query[column];
@@ -33,7 +33,7 @@ module.exports = function (query) {
       }
     }
   } else {
-    var el = this.$el.querySelector('.VueTables__search__input');
+    var el = this.refs.genericFilter.querySelector('.VueTables__search__input');
     if (el) el.value = query;
   }
 };

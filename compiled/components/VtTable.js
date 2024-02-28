@@ -15,10 +15,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var _default2 = {
   name: 'VtTable',
+  inject: ['setRef'],
   components: {
     RLTable: _RLTable["default"],
     VtTableHead: _VtTableHead["default"],
     VtTableBody: _VtTableBody["default"]
+  },
+  mounted: function mounted() {
+    this.setRef('table', this.$refs.table);
   },
   render: function render() {
     var h = arguments[0];
@@ -35,7 +39,8 @@ var _default2 = {
             attrs: {
               summary: props.tableAttrs.summary
             },
-            style: 'border-collapse: collapse; width:100%'
+            style: 'border-collapse: collapse; width:100%',
+            ref: "table"
           }, [caption, h("vt-table-head"), props.slots.beforeBody, h("vt-table-body", {
             ref: "vt_table_body"
           }), props.slots.afterBody]);

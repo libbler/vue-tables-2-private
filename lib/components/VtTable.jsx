@@ -4,7 +4,11 @@ import VtTableBody from "./VtTableBody";
 
 export default {
     name: 'VtTable',
+    inject: ['setRef'],
     components: {RLTable, VtTableHead, VtTableBody},
+    mounted: function mounted() {
+        this.setRef('table', this.$refs.table);
+    },
     render() {
         return <r-l-table scopedSlots={
             {
@@ -17,6 +21,7 @@ export default {
                             class={props.tableAttrs.class}
                             summary={props.tableAttrs.summary}
                             style={'border-collapse: collapse; width:100%'}
+                            ref="table"
                         >
                             {caption}
                             <vt-table-head/>

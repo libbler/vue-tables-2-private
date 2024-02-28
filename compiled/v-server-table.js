@@ -89,7 +89,7 @@ exports.install = function (Vue, globalOptions, useVuex) {
       this._setFiltersDOM(this.query);
 
       if (this.opts.resizableColumns) {
-        (0, _resizeableColumns["default"])(this.$el.querySelector("table"), this.hasChildRow, this.opts.childRowTogglerFirst, this.opts.resizableColumns, this.opts.stickyHeader);
+        (0, _resizeableColumns["default"])(this.refs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.opts.resizableColumns, this.opts.stickyHeader);
       } // this._setColumnsDropdownCloseListener();
 
 

@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var env = process.env.NODE_ENV;
-console.log(env);
+
 module.exports = {
   mode: env==='production' ? env : 'development',
   entry: './lib/index.js',

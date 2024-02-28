@@ -11,7 +11,12 @@ module.exports = function () {
     selectedIndex: false,
     loadingError: false,
     cancelToken: null,
-    drawCounter: 0
+    drawCounter: 0,
+    refs: {
+      genericFilter: null,
+      table: null,
+      filters: {}
+    }
   };
 };
 
