@@ -11,6 +11,7 @@ export default {
                     return props.override ? h(props.override, {
                         attrs: {props}
                     }) : <input
+                        ref="filter"
                         on-keyup={props.search(props.debounce)}
                         class={props.theme.input}
                         name={props.getColumnName(this.column)}

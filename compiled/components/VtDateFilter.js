@@ -30,6 +30,7 @@ var _default2 = {
             }
           }) : h("div", {
             "class": "VueTables__date-filter",
+            ref: "filter",
             attrs: {
               id: 'VueTables__' + _this.column + '-filter'
             }

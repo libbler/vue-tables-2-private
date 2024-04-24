@@ -10,7 +10,7 @@ export default {
                 default: (props) => {
                     return props.override ? h(props.override, {
                         attrs: {props}
-                    }) : <div class="VueTables__date-filter" id={'VueTables__' + this.column + '-filter'}>
+                    }) : <div class="VueTables__date-filter" ref="filter" id={'VueTables__' + this.column + '-filter'}>
                         <span class="VueTables__filter-placeholder">{props.placeholder}</span>
                     </div>
                 }

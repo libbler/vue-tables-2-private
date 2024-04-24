@@ -18,7 +18,8 @@ export default {
                     })
 
                     return props.override ? h(props.override, {attrs:{props}}) : <div class="VueTables__list-filter"
-                                id={'VueTables__' + this.column + '-filter'}>
+                                                                                      ref="filter"
+                                                                                      id={'VueTables__' + this.column + '-filter'}>
                         <select class={props.theme.select}
                                 on-change={props.search(false)}
                                 name={props.name}

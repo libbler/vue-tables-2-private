@@ -30,6 +30,7 @@ var _default2 = {
               props: props
             }
           }) : h("input", {
+            ref: "filter",
             on: {
               "keyup": props.search(props.debounce)
             },
