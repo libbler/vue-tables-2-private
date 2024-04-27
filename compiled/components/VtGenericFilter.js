@@ -17,8 +17,14 @@ var _default2 = {
   components: {
     RLGenericFilter: _RLGenericFilter["default"]
   },
+  setup: function setup() {
+    console.log(1);
+    var filter = (0, _vue.ref)(null);
+    return {
+      filter: filter
+    };
+  },
   mounted: function mounted() {
-    console.log(this.$refs);
     this.setRef('genericFilter', this.$refs.filter);
   },
   render: function render() {

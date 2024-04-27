@@ -1,12 +1,19 @@
 import RLGenericFilter from "./renderless/RLGenericFilter";
-import {ref} from "vue"
+import { ref } from "vue"
 
 export default {
     name: 'VtGenericFilter',
     inject: ['setRef'],
     components: {RLGenericFilter},
+    setup() {
+        console.log(1)
+        const filter = ref(null);
+
+        return {
+            filter,
+        };
+    },
     mounted: function mounted() {
-        console.log(this.$refs)
         this.setRef('genericFilter', this.$refs.filter);
     },
     render() {
