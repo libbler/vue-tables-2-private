@@ -7,6 +7,8 @@ module.exports = function (query) {
 
   if (this.opts.filterByColumn) {
     for (var column in query) {
+      var _this$refs$genericFil;
+
       var columnName = this._getColumnName(column);
 
       if (this.isDateFilter(column)) {
@@ -24,7 +26,7 @@ module.exports = function (query) {
         continue;
       }
 
-      el = this.refs.genericFilter.querySelector("[name='".concat(columnName.replace("'", "\\'"), "']"));
+      el = (_this$refs$genericFil = this.refs.genericFilter) === null || _this$refs$genericFil === void 0 ? void 0 : _this$refs$genericFil.querySelector("[name='".concat(columnName.replace("'", "\\'"), "']"));
 
       if (el) {
         el.value = query[column];
@@ -33,7 +35,12 @@ module.exports = function (query) {
       }
     }
   } else {
-    var el = this.refs.genericFilter.querySelector('.VueTables__search__input');
-    if (el) el.value = query;
+    var _this$refs$genericFil2;
+
+    var el = (_this$refs$genericFil2 = this.refs.genericFilter) === null || _this$refs$genericFil2 === void 0 ? void 0 : _this$refs$genericFil2.querySelector('.VueTables__search__input');
+
+    if (el) {
+      el.value = query;
+    }
   }
 };
