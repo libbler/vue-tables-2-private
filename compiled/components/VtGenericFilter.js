@@ -25,6 +25,7 @@ var _default2 = {
     };
   },
   mounted: function mounted() {
+    console.log(2);
     this.setRef('genericFilter', this.$refs.filter);
   },
   render: function render() {

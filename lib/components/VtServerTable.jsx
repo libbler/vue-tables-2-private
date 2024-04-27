@@ -143,7 +143,7 @@ export default {
                                     <div
                                         class={`${props.theme.field} ${props.theme.inline} ${props.theme.left} VueTables__search`}>
                                         {props.slots.beforeFilter}
-                                        <vt-generic-filter ref="genericFilter"/>
+                                        <vt-generic-filter/>
                                         {props.slots.afterFilter}
                                     </div> : ''}
                                 {props.slots.afterFilterWrapper}

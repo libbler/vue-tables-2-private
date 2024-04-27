@@ -14,6 +14,7 @@ export default {
         };
     },
     mounted: function mounted() {
+        console.log(2)
         this.setRef('genericFilter', this.$refs.filter);
     },
     render() {
