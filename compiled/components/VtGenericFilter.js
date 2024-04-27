@@ -7,8 +7,6 @@ exports["default"] = void 0;
 
 var _RLGenericFilter = _interopRequireDefault(require("./renderless/RLGenericFilter"));
 
-var _vue = require("vue");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _default2 = {
@@ -17,15 +15,7 @@ var _default2 = {
   components: {
     RLGenericFilter: _RLGenericFilter["default"]
   },
-  setup: function setup() {
-    console.log(1);
-    var filter = (0, _vue.ref)(null);
-    return {
-      filter: filter
-    };
-  },
   mounted: function mounted() {
-    console.log(2);
     this.setRef('genericFilter', this.$refs.filter);
   },
   render: function render() {
