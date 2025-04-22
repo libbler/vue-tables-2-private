@@ -4,11 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default;
-
 var _merge = _interopRequireDefault(require("merge"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _default(self) {
   var state = {
     page: self.opts.initialPage ? self.opts.initialPage : 1,
@@ -21,10 +18,8 @@ function _default(self) {
     sortBy: self.opts.orderBy && self.opts.orderBy.column ? self.opts.orderBy.column : false,
     ascending: self.opts.orderBy && self.opts.orderBy.hasOwnProperty('ascending') ? self.opts.orderBy.ascending : true
   };
-
   if (typeof self.$store.state[self.name] !== 'undefined') {
     return (0, _merge["default"])(true, self.$store.state[self.name], state);
   }
-
   return state;
 }

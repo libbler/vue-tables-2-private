@@ -4,16 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _vue = require("vue");
-
 var _RLDateFilter = _interopRequireDefault(require("./renderless/RLDateFilter"));
-
 var _omit = _interopRequireDefault(require("../helpers/omit"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default2 = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default2 = exports["default"] = {
   name: 'VtDateFilter',
   inject: ['setFilterRef'],
   props: ['column'],
@@ -31,7 +26,6 @@ var _default2 = {
   },
   render: function render() {
     var _this = this;
-
     return (0, _vue.h)(_RLDateFilter["default"], {
       column: this.column
     }, {
@@ -49,4 +43,3 @@ var _default2 = {
     });
   }
 };
-exports["default"] = _default2;

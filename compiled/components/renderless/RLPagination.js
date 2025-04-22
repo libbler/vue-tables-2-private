@@ -4,12 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _merge = _interopRequireDefault(require("merge"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default = exports["default"] = {
   name: "RLPagination",
   inject: ['opts', 'count', 'limit', 'vuex', 'name', 'id', 'theme', 'page', 'setPage', 'totalPages', 'componentsOverride'],
   render: function render() {
@@ -45,4 +42,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

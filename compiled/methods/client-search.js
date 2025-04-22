@@ -1,29 +1,22 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var object_filled_keys_count = require('../helpers/object-filled-keys-count');
-
 var is_valid_moment_object = require('../helpers/is-valid-moment-object');
-
 var filterByCustomFilters = require('../filters/custom-filters');
-
 module.exports = function (data, e) {
   if (e) {
     var _query = this.query;
     this.setPage(1, true);
     var name = this.getName(e.target.name);
     var value = _typeof(e.target.value) === 'object' ? e.target.value : '' + e.target.value;
-
     if (name) {
       _query[name] = value;
     } else {
       _query = value;
     }
-
     this.vuex ? this.commit('SET_FILTER', _query) : this.query = _query;
     this.updateState('query', _query);
-
     if (name) {
       this.dispatch('filter', {
         name: name,
@@ -34,15 +27,12 @@ module.exports = function (data, e) {
       this.dispatch('filter', value);
     }
   }
-
   var query = this.query;
   var totalQueries = !query ? 0 : 1;
   if (!this.opts) return data;
-
   if (this.opts.filterByColumn) {
     totalQueries = object_filled_keys_count(query);
   }
-
   var value;
   var found;
   var currentQuery;
@@ -58,14 +48,11 @@ module.exports = function (data, e) {
       isListFilter = this.isListFilter(column) && this.opts.filterByColumn;
       dateFormat = this.dateFormat(column);
       value = this._getValue(row, column);
-
       if (is_valid_moment_object(value) && !filterByDate) {
         value = value.format(dateFormat);
       }
-
       currentQuery = this.opts.filterByColumn ? query[column] : query;
       currentQuery = setCurrentQuery(currentQuery);
-
       if (currentQuery) {
         if (this.opts.filterAlgorithm[column]) {
           if (this.opts.filterAlgorithm[column].call(this.$parent.$parent, row, this.opts.filterByColumn ? query[column] : query)) found++;
@@ -77,43 +64,41 @@ module.exports = function (data, e) {
     return found >= totalQueries;
   }.bind(this));
 };
-
 function setCurrentQuery(query) {
   if (!query) return '';
-  if (typeof query == 'string') return query.toLowerCase(); // Date Range
+  if (typeof query == 'string') return query.toLowerCase();
+
+  // Date Range
 
   return query;
 }
-
 function foundMatch(query, value, isListFilter) {
   if (['string', 'number', 'boolean'].indexOf(_typeof(value)) > -1) {
     value = String(value).toLowerCase();
-  } // List Filter
+  }
 
-
+  // List Filter
   if (isListFilter) {
     return value == query;
-  } //Text Filter
+  }
 
-
+  //Text Filter
   if (typeof value === 'string') {
     return value.indexOf(query) > -1;
-  } // Date range
+  }
 
+  // Date range
 
   if (is_valid_moment_object(value)) {
     var start = moment(query.start, 'YYYY-MM-DD HH:mm:ss');
     var end = moment(query.end, 'YYYY-MM-DD HH:mm:ss');
     return value >= start && value <= end;
   }
-
   if (_typeof(value) === 'object') {
     for (var key in value) {
       if (foundMatch(query, value[key])) return true;
     }
-
     return false;
   }
-
   return value >= start && value <= end;
 }

@@ -29,7 +29,7 @@
   },
   "scripts": {
     "compile": "babel lib -d compiled",
-    "build-npm": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build-npm": "cross-env NODE_ENV=production webpack --config webpack.config.npm.js",
     "build-cdn": "cross-env NODE_ENV=production webpack --config webpack.config.cdn.js",
     "build-cdn-dev": "cross-env NODE_ENV=dev webpack --config webpack.config.cdn.js",
     "test": "npm run test-client && npm run test-client-vuex && npm run test-server && npm run test-server-vuex",

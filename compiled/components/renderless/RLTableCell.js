@@ -4,14 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _merge = _interopRequireDefault(require("merge"));
-
 var _debounce = _interopRequireDefault(require("debounce"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default = exports["default"] = {
   name: 'RLTableCell',
   inject: ['row', 'slots', 'theme', 'orderBy', 'opts', 'render', 'index', 'setEditingCell', 'updateValue', 'revertValue', 'editing', 'getValue', 'columnClass', 'cellClasses', 'componentsOverride', 'isListFilter', 'optionText', 'source', 'dateFormat', 'formatDate', 'tabIndex'],
   props: ['column'],
@@ -39,21 +35,17 @@ var _default = {
       if (this.options.templates[this.column]) {
         return this.render(this.Row, this.column, this.index, h);
       }
-
       if (this.slots()[this.column]) {
         var data = {
           row: this.Row,
           column: this.column,
           index: this.index
         };
-
         if (this.options.editableColumns.includes(this.column)) {
           data = (0, _merge["default"])(data, this.getEditFunctions());
         }
-
         return this.slots()[this.column](data);
       }
-
       return this.formatCellContent(this.getValue(this.Row, this.column), this.column);
     },
     sortedClass: function sortedClass(column) {
@@ -64,17 +56,14 @@ var _default = {
       if (this.source === 'client' && this.options.dateColumns.includes(column)) {
         return this.formatDate(value, this.dateFormat(column));
       }
-
       if (this.isListFilter(column)) {
         return this.optionText(value, column);
       }
-
       return value;
     },
     isEditing: function isEditing() {
       return function () {
         var _this = this;
-
         return this.editing().find(function (e) {
           return e.id === _this.Row[_this.options.uniqueKey] && e.column === _this.column;
         });
@@ -91,4 +80,3 @@ var _default = {
     }
   }
 };
-exports["default"] = _default;

@@ -2,7 +2,6 @@
 
 module.exports = function (rowId) {
   var _this = this;
-
   if (!!this.selectedRows.find(function (row) {
     return String(row[_this.opts.uniqueKey]) === String(rowId);
   })) {
@@ -10,6 +9,5 @@ module.exports = function (rowId) {
   } else {
     this.selectRow(rowId);
   }
-
   return this.selectedRows;
 };

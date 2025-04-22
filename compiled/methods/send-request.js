@@ -4,13 +4,11 @@ module.exports = function (data) {
   if (typeof this.opts.requestFunction === 'function') {
     return this.opts.requestFunction.call(this, data);
   }
-
   if (typeof axios !== 'undefined') {
     if (this.cancelToken) {
       // cancel prev request
       this.cancelToken.cancel();
     }
-
     this.cancelToken = axios.CancelToken.source();
     return axios.get(this.url, {
       params: data,
@@ -21,7 +19,6 @@ module.exports = function (data) {
       this.loadingError = true;
     }.bind(this));
   }
-
   if (typeof this.$http !== 'undefined') return this.$http.get(this.url, {
     params: data
   }).then(function (data) {

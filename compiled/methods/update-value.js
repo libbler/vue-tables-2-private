@@ -1,13 +1,10 @@
 "use strict";
 
 var clone = require('lodash.clonedeep');
-
 var setDeep = require('../helpers/set-deep');
-
 module.exports = function _updateValue(row, column) {
   return function (e) {
     var _this = this;
-
     var oldVal = null;
     setDeep(row, column.split('.'), getValue(e));
     var data = clone(this.data).map(function (r) {
@@ -15,7 +12,6 @@ module.exports = function _updateValue(row, column) {
         oldVal = _this._getValue(r, column);
         return row;
       }
-
       return r;
     });
     this.dispatch('input', data);
@@ -27,11 +23,9 @@ module.exports = function _updateValue(row, column) {
     });
   }.bind(this);
 };
-
 function getValue(val) {
   if (val.target) {
     return val.target.type === 'checkbox' ? val.target.checked : val.target.value;
   }
-
   return val;
 }

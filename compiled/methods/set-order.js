@@ -7,7 +7,6 @@ module.exports = function (column, ascending) {
     column: column,
     ascending: ascending
   });
-
   if (this.source == 'server') {
     this.getData();
   }

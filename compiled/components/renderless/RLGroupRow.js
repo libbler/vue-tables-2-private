@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLGroupRow',
   props: ['value', 'level'],
   inject: ['colspan', 'opts', 'theme', 'toggleGroupDirection', 'toggleGroup', 'groupToggleIcon', 'getGroupSlot', 'componentsOverride'],
@@ -24,4 +24,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

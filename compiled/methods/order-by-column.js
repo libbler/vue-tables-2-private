@@ -3,7 +3,6 @@
 module.exports = function (colName, ev) {
   if (!this.sortable(colName)) return;
   this.setPage(1, true);
-
   if (ev && ev.shiftKey && this.orderBy.column && this.hasMultiSort) {
     this.setUserMultiSort(colName);
   } else {
@@ -13,7 +12,6 @@ module.exports = function (colName, ev) {
     this.updateState('orderBy', this.orderBy);
     this.dispatch('sorted', JSON.parse(JSON.stringify(this.orderBy)));
   }
-
   if (this.source == 'server') {
     this.getData();
   }

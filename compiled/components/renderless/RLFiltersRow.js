@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLFiltersRow',
   inject: ['opts', 'theme', 'allColumns', 'filterable', 'filterType', 'slots', 'columnClass', 'hasChildRow', 'componentsOverride'],
   render: function render() {
@@ -20,4 +20,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

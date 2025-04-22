@@ -4,38 +4,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = install;
-
 var _merge = _interopRequireDefault(require("merge"));
-
 var _data2 = _interopRequireDefault(require("./state/data"));
-
 var _vuex = _interopRequireDefault(require("./state/vuex"));
-
 var _normal = _interopRequireDefault(require("./state/normal"));
-
 var _table = _interopRequireDefault(require("./table"));
-
 var _resizeableColumns = _interopRequireDefault(require("./helpers/resizeable-columns"));
-
 var _VtServerTable = _interopRequireDefault(require("./components/VtServerTable"));
-
 var _themes = _interopRequireDefault(require("./themes/themes"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var _data = require("./mixins/data");
-
 var _created = require("./mixins/created");
-
 var provide = require("./mixins/provide");
-
 function install(app, globalOptions) {
   var theme = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "bootstrap3";
   var componentsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   var themeOverride = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
   var useVuex = false;
   var state = useVuex ? (0, _vuex["default"])("server") : (0, _normal["default"])();
-
   var server = _merge["default"].recursive(true, (0, _table["default"])(), {
     name: "r-l-server-table",
     render: require('./components/renderless/RLDataTable'),
@@ -64,22 +50,18 @@ function install(app, globalOptions) {
       if (!this.opts.requestFunction && !this.url) {
         throw 'vue-tables-3: you must provide either a "url" prop or a custom request function. Aborting';
       }
-
       _created(this);
-
       if (!this.vuex) {
         this.query = this.initQuery();
         this.initOrderBy();
         this.customQueries = this.initCustomFilters();
       }
-
       if (this.opts.sendInitialRequest) {
         this.loadState();
         this.getData(true).then(function (response) {
           if (typeof response === 'undefined') return;
           this.setData(response);
           this.loading = false;
-
           if (this.hasDateFilters()) {
             setTimeout(function () {
               this.initDateFilters();
@@ -92,11 +74,11 @@ function install(app, globalOptions) {
     },
     mounted: function mounted() {
       this._setFiltersDOM(this.query);
-
       if (this.opts.resizableColumns) {
         (0, _resizeableColumns["default"])(this.refs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
-      } // this._setColumnsDropdownCloseListener();
+      }
 
+      // this._setColumnsDropdownCloseListener();
 
       if (this.vuex) return;
       this.registerServerFilters();
@@ -123,17 +105,13 @@ function install(app, globalOptions) {
       setRequestParams: require("./methods/set-request-params"),
       loadState: function loadState() {
         var _this = this;
-
         if (!this.opts.saveState) return;
-
         if (!this.storage.getItem(this.stateKey)) {
           this.initState();
           this.activeState = true;
           return;
         }
-
         var state = JSON.parse(this.storage.getItem(this.stateKey));
-
         if (this.vuex) {
           this.commit("SET_STATE", {
             query: state.query,
@@ -149,19 +127,16 @@ function install(app, globalOptions) {
           this.limit = state.perPage;
           this.orderBy = state.orderBy;
         }
-
         if (!this.opts.pagination.dropdown && this.$refs.pagination) {
           setTimeout(function () {
             _this.$refs.pagination.Page = state.page;
           }, 0);
         }
-
         if (this.opts.filterable) {
           setTimeout(function () {
             _this._setFiltersDOM(state.query);
           }, 0);
         }
-
         this.activeState = true;
       }
     },
@@ -178,10 +153,8 @@ function install(app, globalOptions) {
       }
     }
   }, state);
-
   var comp = (0, _VtServerTable["default"])(server);
   app.component("v-server-table", comp);
   return _VtServerTable["default"];
 }
-
 ;

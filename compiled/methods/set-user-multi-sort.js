@@ -5,7 +5,6 @@ module.exports = function (secondaryCol) {
   var primaryAsc = this.orderBy.ascending;
   if (!this.userMultiSorting[primaryCol]) this.userMultiSorting[primaryCol] = [];
   var multi = this.userMultiSorting[primaryCol];
-
   if (primaryCol === secondaryCol) {
     if (!multi.length || primaryAsc) {
       // primary is the only sorted column or is ascending
@@ -20,7 +19,6 @@ module.exports = function (secondaryCol) {
     var secondary = multi.filter(function (col) {
       return col.column == secondaryCol;
     })[0];
-
     if (secondary) {
       if (!secondary.ascending) {
         // remove sort
@@ -39,17 +37,14 @@ module.exports = function (secondaryCol) {
         ascending: true
       });
     }
-  } // force re-compilation of the filteredData computed property
-
-
+  }
+  // force re-compilation of the filteredData computed property
   this.time = Date.now();
   this.dispatch('sorted', getMultiSortData(this.orderBy, this.userMultiSorting));
 };
-
 function getMultiSortData(main, secondary) {
   var cols = [JSON.parse(JSON.stringify(main))];
   cols = cols.concat(secondary[main.column]);
   return cols;
 }
-
 ;

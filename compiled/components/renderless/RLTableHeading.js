@@ -4,15 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var getThStyle = require('../../mixins/get-th-style');
-
-var _default = {
+var _default = exports["default"] = {
   name: 'RLTableHeading',
   props: ['column'],
   provide: function provide() {
     var _this = this;
-
     return {
       column: function column() {
         return _this.column;
@@ -23,7 +20,6 @@ var _default = {
   mixins: [getThStyle],
   render: function render(h) {
     var _this2 = this;
-
     return this.$slots["default"]({
       opts: this.opts(),
       thAttrs: {
@@ -54,13 +50,10 @@ var _default = {
   methods: {
     getClasses: function getClasses() {
       var cls = this.sortableClass(this.column);
-
       if (this.theme.th) {
         cls += ' ' + this.theme.th;
       }
-
       return cls;
     }
   }
 };
-exports["default"] = _default;

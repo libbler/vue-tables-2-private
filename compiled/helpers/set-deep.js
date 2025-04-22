@@ -16,12 +16,10 @@ module.exports = function setDeep(obj, path, value) {
       a[b] = {};
       return a[b];
     }
-
     if (level === path.length) {
       a[b] = value;
       return value;
     }
-
     return a[b];
   }, obj);
 };

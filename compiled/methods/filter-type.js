@@ -1,13 +1,9 @@
 "use strict";
 
 var _VtTextFilter = _interopRequireDefault(require("../components/VtTextFilter"));
-
 var _VtListFilter = _interopRequireDefault(require("../components/VtListFilter"));
-
 var _VtDateFilter = _interopRequireDefault(require("../components/VtDateFilter"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 module.exports = function (column) {
   if (!this.opts.filterable) return false;
   if (this.isTextFilter(column)) return _VtTextFilter["default"];

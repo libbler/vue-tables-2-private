@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLTableBody',
   inject: ['opts', 'theme', 'source', 'filteredData', 'tableData', 'colspan', 'openChildRows', 'collapsedGroups', 'slots', 'componentsOverride', 'page', 'limit'],
   render: function render() {
@@ -28,13 +28,10 @@ var _default = {
   methods: {
     getGroupBy: function getGroupBy() {
       var groupBy = this.opts().groupBy;
-
       if (groupBy) {
         return typeof groupBy === 'string' ? [groupBy] : groupBy;
       }
-
       return null;
     }
   }
 };
-exports["default"] = _default;

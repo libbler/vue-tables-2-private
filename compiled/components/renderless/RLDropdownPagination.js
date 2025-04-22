@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: "RLDropdownPagination",
   inject: ['limit', 'count', 'theme', 'page', 'setPage', 'totalPages', 'componentsOverride', 'id', 'opts'],
   render: function render() {
@@ -21,4 +21,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

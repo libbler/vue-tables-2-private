@@ -4,10 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var getThStyle = require('../../mixins/get-th-style');
-
-var _default = {
+var _default = exports["default"] = {
   name: 'RLHeadingRow',
   inject: ['opts', 'theme', 'hasChildRow', 'allColumns', 'toggleAllRows', 'componentsOverride'],
   mixins: [getThStyle],
@@ -26,4 +24,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

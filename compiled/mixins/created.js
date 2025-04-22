@@ -1,16 +1,13 @@
 "use strict";
 
 var is_empty = require('../helpers/is-empty');
-
 var registerVuexModule = require('../state/register-module');
-
 module.exports = function (self) {
   if (self.vuex) {
     registerVuexModule(self);
   } else {
     self.limit = self.opts.perPage;
   }
-
   self.columnsDisplay = false;
   if (is_empty(self.opts.columnsDisplay) || typeof window === 'undefined') return;
   self.columnsDisplay = getColumnsDisplay(self.opts.columnsDisplay);
@@ -18,16 +15,13 @@ module.exports = function (self) {
     self.windowWidth = window.innerWidth;
   }.bind(self));
 };
-
 function getColumnsDisplay(columnsDisplay) {
   var res = {};
   var range;
   var device;
   var operator;
-
   for (var column in columnsDisplay) {
     operator = getOperator(columnsDisplay[column]);
-
     try {
       device = getDevice(columnsDisplay[column]);
       range = getRange(device, operator);
@@ -36,10 +30,8 @@ function getColumnsDisplay(columnsDisplay) {
       console.warn('Unknown device ' + device);
     }
   }
-
   return res;
 }
-
 function getRange(device, operator) {
   var devices = {
     desktopHuge: [1920, null],
@@ -52,25 +44,20 @@ function getRange(device, operator) {
     mobileL: [320, 480],
     mobileP: [0, 320]
   };
-
   switch (operator) {
     case 'min':
       return [devices[device][0], null];
-
     case 'max':
       return [0, devices[device][1]];
-
     default:
       return devices[device];
   }
 }
-
 function getOperator(val) {
   var pieces = val.split('_');
   if (['not', 'min', 'max'].indexOf(pieces[0]) > -1) return pieces[0];
   return false;
 }
-
 function getDevice(val) {
   var pieces = val.split('_');
   return pieces.length > 1 ? pieces[1] : pieces[0];

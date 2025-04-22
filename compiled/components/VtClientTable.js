@@ -4,31 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default2;
-
 var _vue = require("vue");
-
 var _VtPerPageSelector = _interopRequireDefault(require("./VtPerPageSelector"));
-
 var _VtTable = _interopRequireDefault(require("./VtTable"));
-
 var _VtPagination = _interopRequireDefault(require("./VtPagination"));
-
 var _VtDropdownPagination = _interopRequireDefault(require("./VtDropdownPagination"));
-
 var _VtGenericFilter = _interopRequireDefault(require("./VtGenericFilter"));
-
 var _VtColumnsDropdown = _interopRequireDefault(require("./VtColumnsDropdown"));
-
 var _VtPaginationCount = _interopRequireDefault(require("./VtPaginationCount"));
-
 var _Observer = _interopRequireDefault(require("./Observer"));
-
 var _emittedEvents = _interopRequireDefault(require("../helpers/emitted-events"));
-
 var _omit = _interopRequireDefault(require("../helpers/omit"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _default2(RLClientTable) {
   return {
     name: 'VtClientTable',
@@ -112,7 +99,6 @@ function _default2(RLClientTable) {
     },
     provide: function provide() {
       var _this = this;
-
       return {
         slots: function slots() {
           return _this.$slots;

@@ -1,26 +1,21 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeableColumns, stickyHeader) {
   var row = table.getElementsByTagName("tr")[0],
-      cols = row ? Array.from(row.children) : undefined;
+    cols = row ? Array.from(row.children) : undefined;
   if (!cols) return;
-
   if (_typeof(resizeableColumns) === 'object') {
     cols = cols.filter(function (col) {
       return resizeableColumns.includes(col.id.split('--')[1]);
     });
   }
-
   if (!stickyHeader) {
     table.style.overflow = "hidden";
   }
-
   var tableHeight = table.offsetHeight;
   var i = hasChildRow && isChildRowTogglerFirst ? 1 : 0;
   var till = hasChildRow && !isChildRowTogglerFirst ? cols.length - 2 : cols.length;
-
   for (; i < till; i++) {
     var div = createDiv(tableHeight);
     div.className = "resize-handle";
@@ -28,7 +23,6 @@ module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeabl
     cols[i].style.position = stickyHeader ? "sticky" : "relative";
     setListeners(div);
   }
-
   function setListeners(div) {
     var pageX, curCol, nxtCol, curColWidth, nxtColWidth;
     div.addEventListener("mousedown", function (e) {
@@ -40,7 +34,9 @@ module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeabl
       var padding = paddingDiff(curCol);
       curColWidth = curCol.offsetWidth - padding;
       if (nxtCol) nxtColWidth = nxtCol.offsetWidth - padding;
-    }); // div.addEventListener("mouseover", function(e) {
+    });
+
+    // div.addEventListener("mouseover", function(e) {
     //   e.target.style.borderRight = "2px solid #0000ff";
     // });
 
@@ -64,7 +60,6 @@ module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeabl
       curColWidth = undefined;
     });
   }
-
   function createDiv(height) {
     var div = document.createElement("div");
     div.style.top = 0;
@@ -76,17 +71,14 @@ module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeabl
     div.style.height = height + "px";
     return div;
   }
-
   function paddingDiff(col) {
     if (getStyleVal(col, "box-sizing") == "border-box") {
       return 0;
     }
-
     var padLeft = getStyleVal(col, "padding-left");
     var padRight = getStyleVal(col, "padding-right");
     return parseInt(padLeft) + parseInt(padRight);
   }
-
   function getStyleVal(elm, css) {
     return window.getComputedStyle(elm, null).getPropertyValue(css);
   }

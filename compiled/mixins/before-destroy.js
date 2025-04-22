@@ -1,10 +1,12 @@
 "use strict";
 
 // import EventBus from '../bus';
+
 module.exports = function () {
   var _this = this;
+  var el;
 
-  var el; // if (this.opts.destroyEventBus) {
+  // if (this.opts.destroyEventBus) {
   //     EventBus.$off();
   //     EventBus.$destroy();
   // }
@@ -12,7 +14,6 @@ module.exports = function () {
   if (this.vuex && !this.opts.preserveState) {
     this.$store.unregisterModule(this.name);
   }
-
   if (this.opts.filterByColumn) {
     this.datepickerColumns.forEach(function (column) {
       el = $(_this.$el).find("#VueTables__" + $.escapeSelector(column) + "-filter").data('daterangepicker');

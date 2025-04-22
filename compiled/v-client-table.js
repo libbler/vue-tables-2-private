@@ -4,37 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = install;
-
 var _vuex = _interopRequireDefault(require("./state/vuex"));
-
 var _normal = _interopRequireDefault(require("./state/normal"));
-
 var _merge = _interopRequireDefault(require("merge"));
-
 var _data2 = _interopRequireDefault(require("./state/data"));
-
 var _resizeableColumns = _interopRequireDefault(require("./helpers/resizeable-columns"));
-
 var _VtClientTable = _interopRequireDefault(require("./components/VtClientTable"));
-
 var _table = _interopRequireDefault(require("./table"));
-
 var _themes = _interopRequireDefault(require("./themes/themes"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var _data = require("./mixins/data");
-
 var _created = require("./mixins/created");
-
 var provide = require("./mixins/provide");
-
 function install(app, globalOptions) {
   var theme = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "bootstrap3";
   var componentsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   var themeOverride = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
   var useVuex = false;
-
   var client = _merge["default"].recursive(true, (0, _table["default"])(), {
     name: "r-l-client-table",
     render: require('./components/renderless/RLDataTable'),
@@ -62,9 +48,7 @@ function install(app, globalOptions) {
     },
     created: function created() {
       _created(this);
-
       if (this.opts.toMomentFormat) this.transformDateStringsToMoment();
-
       if (!this.vuex) {
         this.initOrderBy();
         this.query = this.initQuery();
@@ -73,13 +57,10 @@ function install(app, globalOptions) {
     },
     mounted: function mounted() {
       var _this = this;
-
       this._setFiltersDOM(this.query);
-
       if (this.opts.resizableColumns) {
         (0, _resizeableColumns["default"])(this.refs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
       }
-
       if (this.groupBy && this.groupBy.length > 1) {
         this.options.multiSorting = {};
         this.options.multiSorting[this.groupBy[0]] = [{
@@ -87,24 +68,20 @@ function install(app, globalOptions) {
           matchDir: true
         }];
       }
-
       if (!this.vuex) {
         this.registerClientFilters();
         if (this.options.initialPage) this.setPage(this.options.initialPage);
       }
-
       if (this.groupBy && !this.orderBy) {
         this.orderBy.column = this.groupBy[0];
       }
-
       this.loadState();
-
       if (this.hasDateFilters()) {
         this.initDateFilters();
-      } // listen for data being removed
+      }
+
+      // listen for data being removed
       // and nav to last page if current page is greater than total pages
-
-
       this.$watch('data', function () {
         if (_this.page > _this.totalPages) {
           _this.setPage(_this.totalPages);
@@ -147,7 +124,6 @@ function install(app, globalOptions) {
       toggleGroup: function toggleGroup(group, e) {
         e.stopPropagation();
         var i = this.collapsedGroups.indexOf(group);
-
         if (i >= 0) {
           this.collapsedGroups.splice(i, 1);
         } else {
@@ -161,16 +137,13 @@ function install(app, globalOptions) {
       },
       downloadCsv: function downloadCsv() {
         var _this2 = this;
-
         var filename = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'table.csv';
         var r;
         var rows = [this.columns].concat(this.allFilteredData.map(function (row) {
           r = {};
-
           _this2.columns.forEach(function (column) {
             r[column] = row[column];
           });
-
           return Object.values(r);
         }));
         var csvContent = "data:text/csv;charset=utf-8," + rows.map(function (e) {
@@ -183,45 +156,38 @@ function install(app, globalOptions) {
         document.body.appendChild(link); // Required for FF
 
         link.click(); // This will download the data file
-
         link.remove();
       },
       loadState: function loadState() {
         if (!this.opts.saveState) return;
-
         if (!this.storage.getItem(this.stateKey)) {
           this.initState();
           this.activeState = true;
           return;
         }
-
         var state = JSON.parse(this.storage.getItem(this.stateKey));
         if (this.opts.filterable) this.setFilter(state.query);
         this.setOrder(state.orderBy.column, state.orderBy.ascending);
-
         if (this.vuex) {
           this.commit("SET_LIMIT", state.perPage);
         } else {
           this.limit = state.perPage;
         }
-
         this.setPage(state.page);
         this.activeState = true;
-
         if (state.userControlsColumns) {
           this.userColumnsDisplay = state.userColumnsDisplay;
           this.userControlsColumns = state.userControlsColumns;
-        } // TODO: Custom Queries
+        }
 
+        // TODO: Custom Queries
       }
     }
   });
-
   var state = useVuex ? (0, _vuex["default"])() : (0, _normal["default"])();
   client = _merge["default"].recursive(client, state);
   var comp = (0, _VtClientTable["default"])(client);
   app.component("v-client-table", comp);
   return comp;
 }
-
 ;

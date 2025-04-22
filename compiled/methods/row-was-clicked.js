@@ -3,7 +3,6 @@
 module.exports = function (row, index, event) {
   var data;
   var id = this.opts.uniqueKey;
-
   if (this.source == 'client' && typeof row[id] !== 'undefined') {
     data = this.tableData.filter(function (r) {
       return row[id] === r[id];
@@ -11,7 +10,6 @@ module.exports = function (row, index, event) {
   } else {
     data = row;
   }
-
   this.dispatch('row-click', {
     row: data,
     index: index,

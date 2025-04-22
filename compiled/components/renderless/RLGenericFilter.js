@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLGenericFilter',
   inject: ['opts', 'theme', 'source', 'search', 'query', 'display', 'id', 'componentsOverride'],
   render: function render() {
@@ -19,4 +19,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;
