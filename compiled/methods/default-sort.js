@@ -13,19 +13,15 @@ module.exports = function (column, ascending) {
     var secondaryAsc;
     if (typeof aVal === 'string') aVal = aVal.toLowerCase();
     if (typeof bVal === 'string') bVal = bVal.toLowerCase();
-
     if (aVal === bVal && multiSort && multiSort[multiIndex + 1]) {
       var sortData = multiSort[multiIndex + 1];
-
       if (typeof sortData.ascending !== 'undefined') {
         secondaryAsc = sortData.ascending;
       } else {
         secondaryAsc = sortData.matchDir ? asc : !asc;
       }
-
       return sort(sortData.column, secondaryAsc, multiIndex + 1)(a, b);
     }
-
     return aVal > bVal ? dir : -dir;
   };
 };

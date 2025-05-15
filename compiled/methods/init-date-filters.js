@@ -1,33 +1,27 @@
 "use strict";
 
 var merge = require('merge');
-
 module.exports = function () {
   if (typeof $ === 'undefined' || typeof $(this.$el).daterangepicker === 'undefined') {
     console.error('Date filters require jquery and daterangepicker');
     return;
   }
-
   var el;
   var that = this;
   var query = this.vuex ? JSON.parse(JSON.stringify(this.query)) : this.query;
   var columnOptions;
   var dpOptions;
-
   var search = function search(query, e) {
     return that.source == 'client' ? that.search(that.data, e) : that.serverSearch(query, e);
   };
-
   var datepickerOptions = merge.recursive(this.opts.datepickerOptions, {
     autoUpdateInput: false,
     singleDatePicker: false
   });
   that.datepickerColumns.forEach(function (column) {
     var range = that._getInitialDateRange(column);
-
     if (range) {
       that._setDatepickerText(column, range.start, range.end);
-
       range = {
         startDate: range.start,
         endDate: range.end
@@ -35,7 +29,6 @@ module.exports = function () {
     } else {
       range = {};
     }
-
     el = $(that.refs.filters[column]);
     columnOptions = typeof that.opts.datepickerPerColumnOptions[column] !== 'undefined' ? that.opts.datepickerPerColumnOptions[column] : {};
     columnOptions = merge.recursive(columnOptions, {
@@ -44,11 +37,9 @@ module.exports = function () {
       }
     });
     dpOptions = merge(true, datepickerOptions);
-
     if (columnOptions.ranges === false) {
       dpOptions.ranges = {};
     }
-
     el.daterangepicker(merge.recursive(dpOptions, columnOptions, range));
     el.on('apply.daterangepicker', function (ev, picker) {
       query[column] = {
@@ -56,9 +47,7 @@ module.exports = function () {
         end: picker.endDate.format('YYYY-MM-DD HH:mm:ss')
       };
       if (!that.vuex) that.query = query;
-
       that._setDatepickerText(column, picker.startDate, picker.endDate);
-
       that.updateState('query', query);
       search(query, {
         target: {

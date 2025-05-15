@@ -4,13 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default;
-
 var _merge = _interopRequireDefault(require("merge"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _default(source) {
   var extra = source == 'server' ? serverExtra() : clientExtra();
   return _merge["default"].recursive(true, {
@@ -61,7 +57,6 @@ function _default(source) {
       },
       orderByColumn: function orderByColumn(column, ev) {
         if (!this.sortable(column)) return;
-
         if (ev.shiftKey && this.orderBy.column && this.hasMultiSort) {
           this.setUserMultiSort(column);
         } else {
@@ -98,7 +93,6 @@ function _default(source) {
     }
   }, extra);
 }
-
 function serverExtra() {
   return {
     methods: {
@@ -111,7 +105,6 @@ function serverExtra() {
     }
   };
 }
-
 function clientExtra() {
   return {};
 }

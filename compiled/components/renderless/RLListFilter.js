@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLListFilter',
   inject: ['search', 'query', 'theme', 'getHeading', 'display', 'getColumnName', 'opts', 'componentsOverride'],
   props: ['column'],
@@ -29,4 +29,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

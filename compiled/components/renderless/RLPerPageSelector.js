@@ -4,12 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: "RLPerPageSelector",
   inject: ['opts', 'limit', 'setLimit', 'perPageValues', 'id', 'theme', 'display', 'componentsOverride'],
   render: function render() {
     var _this = this;
-
     return this.$slots["default"]({
       opts: this.opts(),
       perPageValues: this.perPageValues(),
@@ -33,4 +32,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

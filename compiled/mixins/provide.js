@@ -2,7 +2,6 @@
 
 module.exports = function () {
   var _this = this;
-
   return {
     count: function count() {
       return _this.count;

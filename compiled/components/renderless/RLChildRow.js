@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLChildRow',
   props: ['row', 'index'],
   inject: ['colspan', 'getChildRowTemplate', 'opts', 'slots', 'componentsOverride'],
@@ -18,4 +18,3 @@ var _default = {
     });
   }
 };
-exports["default"] = _default;

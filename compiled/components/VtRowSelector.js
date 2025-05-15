@@ -4,14 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _vue = require("vue");
-
 var _RLRowSelector = _interopRequireDefault(require("./renderless/RLRowSelector"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default2 = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default2 = exports["default"] = {
   name: 'VtRowSelector',
   components: {
     RLRowSelector: _RLRowSelector["default"]
@@ -39,4 +35,3 @@ var _default2 = {
     });
   }
 };
-exports["default"] = _default2;

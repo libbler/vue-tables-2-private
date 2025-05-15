@@ -2,12 +2,10 @@
 
 module.exports = function (column) {
   var _this = this;
-
   if (!this.userControlsColumns) {
     this.userColumnsDisplay = JSON.parse(JSON.stringify(this.allColumns));
     this.userControlsColumns = true;
   }
-
   if (this.userColumnsDisplay.includes(column)) {
     // can't have no columns
     if (this.userColumnsDisplay.length === 1) return;
@@ -16,7 +14,6 @@ module.exports = function (column) {
   } else {
     this.userColumnsDisplay.push(column);
   }
-
   this.updateState('userControlsColumns', true);
   this.updateState('userColumnsDisplay', this.userColumnsDisplay);
   this.$nextTick(function () {

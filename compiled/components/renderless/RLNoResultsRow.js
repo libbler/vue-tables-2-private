@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLNoResultsRow',
   inject: ['colspan', 'display', 'theme', 'componentsOverride', 'loading', 'loadingError', 'initialRequestSent', 'tabIndex', 'opts'],
   render: function render() {
@@ -27,11 +27,9 @@ var _default = {
       if (this.loadingError()) {
         return 'VueTables__error';
       }
-
       if (this.loading()) {
         return 'VueTables__loading';
       }
-
       return 'VueTables__no-results';
     }
   },
@@ -40,17 +38,13 @@ var _default = {
       if (this.loadingError()) {
         return 'loadingError';
       }
-
       if (this.loading()) {
         return 'loading';
       }
-
       if (!this.opts().sendInitialRequest && !this.initialRequestSent()) {
         return 'noRequest';
       }
-
       return 'noResults';
     }
   }
 };
-exports["default"] = _default;

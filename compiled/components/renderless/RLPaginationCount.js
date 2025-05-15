@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   inject: ['page', 'limit', 'opts', 'allFilteredData', 'source', 'tableData', 'count'],
   render: function render() {
     return this.$slots["default"]({
@@ -18,9 +18,7 @@ var _default = {
       if (this.source === 'client') {
         return this.page() * this.limit() > this.allFilteredData().length ? this.allFilteredData().length : this.page() * this.limit();
       }
-
       return this.tableData().length;
     }
   }
 };
-exports["default"] = _default;

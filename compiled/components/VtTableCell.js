@@ -4,16 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _vue = require("vue");
-
 var _RLTableCell = _interopRequireDefault(require("./renderless/RLTableCell"));
-
 var _omit = _interopRequireDefault(require("../helpers/omit"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default2 = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default2 = exports["default"] = {
   name: 'VtTableCell',
   props: ['column'],
   components: {
@@ -34,4 +29,3 @@ var _default2 = {
     });
   }
 };
-exports["default"] = _default2;

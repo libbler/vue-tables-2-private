@@ -4,13 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-var _default = {
+var _default = exports["default"] = {
   name: 'RLTableRow',
   props: ['row', 'index'],
   inject: ['allColumns', 'opts', 'rowWasClicked', 'hasChildRow', 'theme', 'componentsOverride', 'isRowSelected'],
   provide: function provide() {
     var _this = this;
-
     return {
       row: function row() {
         return _this.row;
@@ -40,25 +39,19 @@ var _default = {
   methods: {
     getClass: function getClass() {
       var cls = [];
-
       if (this.opts().rowClassCallback) {
         cls.push(this.opts().rowClassCallback(this.row));
       }
-
       cls.push(this.theme.tr);
-
       if (this.index % 2 === 0) {
         cls.push(this.theme.trEven);
       } else {
         cls.push(this.theme.trOdd);
       }
-
       if (this.opts().selectable.mode && this.isRowSelected(this.row)) {
         cls.push('VueTables__row--selected');
       }
-
       return cls.join(' ');
     }
   }
 };
-exports["default"] = _default;

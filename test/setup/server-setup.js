@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { mount } from 'vue-test-utils'
+import { mount } from '@vue/test-utils'
 import ServerTable from '../../compiled/v-server-table.js'
 
 global.suite = 'Server';

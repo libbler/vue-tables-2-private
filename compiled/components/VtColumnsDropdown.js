@@ -4,18 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _vue = require("vue");
-
 var _RLColumnsDropdown = _interopRequireDefault(require("./renderless/RLColumnsDropdown"));
-
 var _dropdownWrapper = _interopRequireDefault(require("./dropdown-wrapper"));
-
 var _omit = _interopRequireDefault(require("../helpers/omit"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _default2 = {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _default2 = exports["default"] = {
   name: 'VtColumnsDropdown',
   components: {
     RLColumnsDropdown: _RLColumnsDropdown["default"]
@@ -28,7 +22,6 @@ var _default2 = {
             props: (0, _omit["default"])(props)
           });
         }
-
         var content;
         var cols = props.origColumns.map(function (column) {
           content = (0, _vue.createVNode)("a", {
@@ -60,4 +53,3 @@ var _default2 = {
     });
   }
 };
-exports["default"] = _default2;

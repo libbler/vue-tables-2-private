@@ -4,11 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default;
-
 var _merge = _interopRequireDefault(require("merge"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _default(useVuex, source) {
   var page = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var data = {

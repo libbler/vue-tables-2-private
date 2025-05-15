@@ -1,9 +1,7 @@
 "use strict";
 
 var _bus = _interopRequireDefault(require("../bus"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 module.exports = function () {
   var event = 'vue-tables';
   if (this.name) event += '.' + this.name;

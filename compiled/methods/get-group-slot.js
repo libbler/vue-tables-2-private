@@ -8,6 +8,5 @@ module.exports = function (value) {
     if (!data) return '';
     return this.$parent.$scopedSlots['__group_meta'](data);
   }
-
   return '';
 };

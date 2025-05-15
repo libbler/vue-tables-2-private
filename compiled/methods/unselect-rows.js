@@ -2,7 +2,6 @@
 
 module.exports = function (rowIds) {
   var _this = this;
-
   rowIds = rowIds.map(function (id) {
     return String(id);
   });
