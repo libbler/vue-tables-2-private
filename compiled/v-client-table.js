@@ -59,7 +59,7 @@ function install(app, globalOptions) {
       var _this = this;
       this._setFiltersDOM(this.query);
       if (this.opts.resizableColumns) {
-        (0, _resizeableColumns["default"])(this.refs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
+        (0, _resizeableColumns["default"])(this._elRefs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
       }
       if (this.groupBy && this.groupBy.length > 1) {
         this.options.multiSorting = {};

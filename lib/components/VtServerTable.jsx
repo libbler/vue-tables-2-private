@@ -48,79 +48,81 @@ export default function (RLServerTable) {
         computed: {
             customQueries: {
                 get() {
-                    return this.$refs.table.customQueries;
+                    return this.$refs.table?.customQueries;
                 },
                 set(val) {
-                    this.$refs.table.customQueries = val;
+                    if (this.$refs.table) {
+                        this.$refs.table.customQueries = val;
+                    }
                 }
             },
             data() {
-                return this.$refs.table.tableData
+                return this.$refs.table?.tableData
             },
             selectedRows() {
-                return this.$refs.table.selectedRows
+                return this.$refs.table?.selectedRows
             }
         },
         methods: {
             refresh() {
-                this.$refs.table.refresh();
+                this.$refs.table?.refresh();
             },
             getData() {
-                return this.$refs.table.getData();
+                return this.$refs.table?.getData();
             },
             setFilter(val) {
-                this.$refs.table.setFilter(val);
+                this.$refs.table?.setFilter(val);
             },
             setPage(val) {
-                this.$refs.table.setPage(val);
+                this.$refs.table?.setPage(val);
             },
             setOrder(column, asc) {
-                this.$refs.table.setOrder(column, asc);
+                this.$refs.table?.setOrder(column, asc);
             },
             setLimit(limit) {
-                this.$refs.table.setLimit(limit);
+                this.$refs.table?.setLimit(limit);
             },
             toggleChildRow(rowId) {
-                this.$refs.table.toggleChildRow(rowId);
+                this.$refs.table?.toggleChildRow(rowId);
             },
             getOpenChildRows(rows = null) {
-                return this.$refs.table.getOpenChildRows(rows);
+                return this.$refs.table?.getOpenChildRows(rows);
             },
             getResponseData(response) {
-                return this.$refs.table.getResponseData(response);
+                return this.$refs.table?.getResponseData(response);
             },
             resetQuery() {
-                this.$refs.table.resetQuery()
+                this.$refs.table?.resetQuery()
             },
             resetSelectedRows() {
-                this.$refs.table.resetSelectedRows()
+                this.$refs.table?.resetSelectedRows()
             },
             selectRow(id) {
-                return this.$refs.table.selectRow(id)
+                return this.$refs.table?.selectRow(id)
             },
             unselectRow(id) {
-                return this.$refs.table.unselectRow(id)
+                return this.$refs.table?.unselectRow(id)
             },
             selectRows(ids) {
-                return this.$refs.table.selectRows(ids)
+                return this.$refs.table?.selectRows(ids)
             },
             unselectRows(ids) {
-                return this.$refs.table.unselectRows(ids)
+                return this.$refs.table?.unselectRows(ids)
             },
             toggleRow(id) {
-                return this.$refs.table.toggleRow(id)
+                return this.$refs.table?.toggleRow(id)
             },
             selectAllRows() {
-                return this.$refs.table.selectAllRows()
+                return this.$refs.table?.selectAllRows()
             },
             getRequestParams() {
-                return this.$refs.table.getRequestParams()
+                return this.$refs.table?.getRequestParams()
             },
             setRequestParams(params, sendRequest = true) {
-                return this.$refs.table.setRequestParams(params, sendRequest)
+                return this.$refs.table?.setRequestParams(params, sendRequest)
             },
             setCustomFilters(params, sendRequest = true) {
-                return this.$refs.table.setCustomFilters(params, sendRequest)
+                return this.$refs.table?.setCustomFilters(params, sendRequest)
             },
             resetCustomFilters: require('../methods/reset-custom-filters')
         },

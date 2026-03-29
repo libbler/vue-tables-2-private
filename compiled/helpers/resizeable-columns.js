@@ -2,6 +2,7 @@
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 module.exports = function (table, hasChildRow, isChildRowTogglerFirst, resizeableColumns, stickyHeader) {
+  if (!table) return;
   var row = table.getElementsByTagName("tr")[0],
     cols = row ? Array.from(row.children) : undefined;
   if (!cols) return;

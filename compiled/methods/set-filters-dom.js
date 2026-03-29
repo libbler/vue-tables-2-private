@@ -11,13 +11,13 @@ module.exports = function (query) {
           var end = typeof query[column].end === 'string' ? moment(query[column].end, 'YYYY-MM-DD') : query[column].end;
           this._setDatepickerText(column, start, end);
         } else {
-          $(this.refs.filters[column]).html("<span class='VueTables__filter-placeholder'>" + this.display('filterBy', {
+          $(this._elRefs.filters[column]).html("<span class='VueTables__filter-placeholder'>" + this.display('filterBy', {
             column: this.getHeading(column)
           }) + "</span>");
         }
         continue;
       }
-      el = this.refs.filters[column];
+      el = this._elRefs.filters[column];
       if (el) {
         el.value = query[column];
       } else if (this.columns.indexOf(column) === -1) {
@@ -25,7 +25,7 @@ module.exports = function (query) {
       }
     }
   } else {
-    var el = this.refs.genericFilter;
+    var el = this._elRefs.genericFilter;
     if (el) el.value = query;
   }
 };

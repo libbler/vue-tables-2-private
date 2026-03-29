@@ -75,7 +75,7 @@ function install(app, globalOptions) {
     mounted: function mounted() {
       this._setFiltersDOM(this.query);
       if (this.opts.resizableColumns) {
-        (0, _resizeableColumns["default"])(this.refs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
+        (0, _resizeableColumns["default"])(this._elRefs.table, this.hasChildRow, this.opts.childRowTogglerFirst, this.resizableColumns, this.opts.stickyHeader);
       }
 
       // this._setColumnsDropdownCloseListener();

@@ -54,82 +54,107 @@ function _default2(RLServerTable) {
     computed: {
       customQueries: {
         get: function get() {
-          return this.$refs.table.customQueries;
+          var _this$$refs$table;
+          return (_this$$refs$table = this.$refs.table) === null || _this$$refs$table === void 0 ? void 0 : _this$$refs$table.customQueries;
         },
         set: function set(val) {
-          this.$refs.table.customQueries = val;
+          if (this.$refs.table) {
+            this.$refs.table.customQueries = val;
+          }
         }
       },
       data: function data() {
-        return this.$refs.table.tableData;
+        var _this$$refs$table2;
+        return (_this$$refs$table2 = this.$refs.table) === null || _this$$refs$table2 === void 0 ? void 0 : _this$$refs$table2.tableData;
       },
       selectedRows: function selectedRows() {
-        return this.$refs.table.selectedRows;
+        var _this$$refs$table3;
+        return (_this$$refs$table3 = this.$refs.table) === null || _this$$refs$table3 === void 0 ? void 0 : _this$$refs$table3.selectedRows;
       }
     },
     methods: {
       refresh: function refresh() {
-        this.$refs.table.refresh();
+        var _this$$refs$table4;
+        (_this$$refs$table4 = this.$refs.table) === null || _this$$refs$table4 === void 0 || _this$$refs$table4.refresh();
       },
       getData: function getData() {
-        return this.$refs.table.getData();
+        var _this$$refs$table5;
+        return (_this$$refs$table5 = this.$refs.table) === null || _this$$refs$table5 === void 0 ? void 0 : _this$$refs$table5.getData();
       },
       setFilter: function setFilter(val) {
-        this.$refs.table.setFilter(val);
+        var _this$$refs$table6;
+        (_this$$refs$table6 = this.$refs.table) === null || _this$$refs$table6 === void 0 || _this$$refs$table6.setFilter(val);
       },
       setPage: function setPage(val) {
-        this.$refs.table.setPage(val);
+        var _this$$refs$table7;
+        (_this$$refs$table7 = this.$refs.table) === null || _this$$refs$table7 === void 0 || _this$$refs$table7.setPage(val);
       },
       setOrder: function setOrder(column, asc) {
-        this.$refs.table.setOrder(column, asc);
+        var _this$$refs$table8;
+        (_this$$refs$table8 = this.$refs.table) === null || _this$$refs$table8 === void 0 || _this$$refs$table8.setOrder(column, asc);
       },
       setLimit: function setLimit(limit) {
-        this.$refs.table.setLimit(limit);
+        var _this$$refs$table9;
+        (_this$$refs$table9 = this.$refs.table) === null || _this$$refs$table9 === void 0 || _this$$refs$table9.setLimit(limit);
       },
       toggleChildRow: function toggleChildRow(rowId) {
-        this.$refs.table.toggleChildRow(rowId);
+        var _this$$refs$table10;
+        (_this$$refs$table10 = this.$refs.table) === null || _this$$refs$table10 === void 0 || _this$$refs$table10.toggleChildRow(rowId);
       },
       getOpenChildRows: function getOpenChildRows() {
+        var _this$$refs$table11;
         var rows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-        return this.$refs.table.getOpenChildRows(rows);
+        return (_this$$refs$table11 = this.$refs.table) === null || _this$$refs$table11 === void 0 ? void 0 : _this$$refs$table11.getOpenChildRows(rows);
       },
       getResponseData: function getResponseData(response) {
-        return this.$refs.table.getResponseData(response);
+        var _this$$refs$table12;
+        return (_this$$refs$table12 = this.$refs.table) === null || _this$$refs$table12 === void 0 ? void 0 : _this$$refs$table12.getResponseData(response);
       },
       resetQuery: function resetQuery() {
-        this.$refs.table.resetQuery();
+        var _this$$refs$table13;
+        (_this$$refs$table13 = this.$refs.table) === null || _this$$refs$table13 === void 0 || _this$$refs$table13.resetQuery();
       },
       resetSelectedRows: function resetSelectedRows() {
-        this.$refs.table.resetSelectedRows();
+        var _this$$refs$table14;
+        (_this$$refs$table14 = this.$refs.table) === null || _this$$refs$table14 === void 0 || _this$$refs$table14.resetSelectedRows();
       },
       selectRow: function selectRow(id) {
-        return this.$refs.table.selectRow(id);
+        var _this$$refs$table15;
+        return (_this$$refs$table15 = this.$refs.table) === null || _this$$refs$table15 === void 0 ? void 0 : _this$$refs$table15.selectRow(id);
       },
       unselectRow: function unselectRow(id) {
-        return this.$refs.table.unselectRow(id);
+        var _this$$refs$table16;
+        return (_this$$refs$table16 = this.$refs.table) === null || _this$$refs$table16 === void 0 ? void 0 : _this$$refs$table16.unselectRow(id);
       },
       selectRows: function selectRows(ids) {
-        return this.$refs.table.selectRows(ids);
+        var _this$$refs$table17;
+        return (_this$$refs$table17 = this.$refs.table) === null || _this$$refs$table17 === void 0 ? void 0 : _this$$refs$table17.selectRows(ids);
       },
       unselectRows: function unselectRows(ids) {
-        return this.$refs.table.unselectRows(ids);
+        var _this$$refs$table18;
+        return (_this$$refs$table18 = this.$refs.table) === null || _this$$refs$table18 === void 0 ? void 0 : _this$$refs$table18.unselectRows(ids);
       },
       toggleRow: function toggleRow(id) {
-        return this.$refs.table.toggleRow(id);
+        var _this$$refs$table19;
+        return (_this$$refs$table19 = this.$refs.table) === null || _this$$refs$table19 === void 0 ? void 0 : _this$$refs$table19.toggleRow(id);
       },
       selectAllRows: function selectAllRows() {
-        return this.$refs.table.selectAllRows();
+        var _this$$refs$table20;
+        return (_this$$refs$table20 = this.$refs.table) === null || _this$$refs$table20 === void 0 ? void 0 : _this$$refs$table20.selectAllRows();
       },
       getRequestParams: function getRequestParams() {
-        return this.$refs.table.getRequestParams();
+        var _this$$refs$table21;
+        return (_this$$refs$table21 = this.$refs.table) === null || _this$$refs$table21 === void 0 ? void 0 : _this$$refs$table21.getRequestParams();
       },
       setRequestParams: function setRequestParams(params) {
+        var _this$$refs$table22;
         var sendRequest = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-        return this.$refs.table.setRequestParams(params, sendRequest);
+        return (_this$$refs$table22 = this.$refs.table) === null || _this$$refs$table22 === void 0 ? void 0 : _this$$refs$table22.setRequestParams(params, sendRequest);
       },
       setCustomFilters: function setCustomFilters(params) {
+        var _this$$refs$table23;
         var sendRequest = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-        return this.$refs.table.setCustomFilters(params, sendRequest);
+        return (_this$$refs$table23 = this.$refs.table) === null || _this$$refs$table23 === void 0 ? void 0 : _this$$refs$table23.setCustomFilters(params, sendRequest);
       },
       resetCustomFilters: require('../methods/reset-custom-filters')
     },
