@@ -120,10 +120,10 @@ module.exports = function () {
       return _this.initialRequestSent;
     },
     setRef: function setRef(key, el) {
-      _this.refs[key] = el;
+      _this._elRefs[key] = el;
     },
     setFilterRef: function setFilterRef(key, el) {
-      _this.refs.filters[key] = el;
+      _this._elRefs.filters[key] = el;
     }
   };
 };

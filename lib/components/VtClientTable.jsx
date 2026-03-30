@@ -48,45 +48,47 @@ export default function (RLClientTable) {
         },
         methods: {
             setLoadingState(isLoading) {
-                this.$refs.table.loading = isLoading
+                if (this.$refs.table) {
+                    this.$refs.table.loading = isLoading
+                }
             },
             setFilter(val) {
-                this.$refs.table.setFilter(val);
+                this.$refs.table?.setFilter(val);
             },
             setPage(val) {
-                this.$refs.table.setPage(val);
+                this.$refs.table?.setPage(val);
             },
             setOrder(column, asc) {
-                this.$refs.table.setOrder(column, asc);
+                this.$refs.table?.setOrder(column, asc);
             },
             setLimit(limit) {
-                this.$refs.table.setLimit(limit);
+                this.$refs.table?.setLimit(limit);
             },
             toggleChildRow(rowId) {
-                this.$refs.table.toggleChildRow(rowId);
+                this.$refs.table?.toggleChildRow(rowId);
             },
             getOpenChildRows(rows = null) {
-                return this.$refs.table.getOpenChildRows(rows);
+                return this.$refs.table?.getOpenChildRows(rows);
             },
             resetQuery() {
-                this.$refs.table.resetQuery()
+                this.$refs.table?.resetQuery()
             },
             setCustomFilters(params, sendRequest = false) {
-                return this.$refs.table.setCustomFilters(params, sendRequest)
+                return this.$refs.table?.setCustomFilters(params, sendRequest)
             },
             downloadCsv(filename = 'table.csv') {
-                return this.$refs.table.downloadCsv(filename)
+                return this.$refs.table?.downloadCsv(filename)
             }
         },
         computed: {
             filteredData() {
-                return this.$refs.table.filteredData;
+                return this.$refs.table?.filteredData;
             },
             allFilteredData() {
-                return this.$refs.table.allFilteredData
+                return this.$refs.table?.allFilteredData
             },
             filtersCount() {
-                return this.$refs.table.filtersCount
+                return this.$refs.table?.filtersCount
             }
         },
         provide() {

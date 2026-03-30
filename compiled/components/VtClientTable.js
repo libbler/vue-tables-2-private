@@ -53,48 +53,62 @@ function _default2(RLClientTable) {
     },
     methods: {
       setLoadingState: function setLoadingState(isLoading) {
-        this.$refs.table.loading = isLoading;
+        if (this.$refs.table) {
+          this.$refs.table.loading = isLoading;
+        }
       },
       setFilter: function setFilter(val) {
-        this.$refs.table.setFilter(val);
+        var _this$$refs$table;
+        (_this$$refs$table = this.$refs.table) === null || _this$$refs$table === void 0 || _this$$refs$table.setFilter(val);
       },
       setPage: function setPage(val) {
-        this.$refs.table.setPage(val);
+        var _this$$refs$table2;
+        (_this$$refs$table2 = this.$refs.table) === null || _this$$refs$table2 === void 0 || _this$$refs$table2.setPage(val);
       },
       setOrder: function setOrder(column, asc) {
-        this.$refs.table.setOrder(column, asc);
+        var _this$$refs$table3;
+        (_this$$refs$table3 = this.$refs.table) === null || _this$$refs$table3 === void 0 || _this$$refs$table3.setOrder(column, asc);
       },
       setLimit: function setLimit(limit) {
-        this.$refs.table.setLimit(limit);
+        var _this$$refs$table4;
+        (_this$$refs$table4 = this.$refs.table) === null || _this$$refs$table4 === void 0 || _this$$refs$table4.setLimit(limit);
       },
       toggleChildRow: function toggleChildRow(rowId) {
-        this.$refs.table.toggleChildRow(rowId);
+        var _this$$refs$table5;
+        (_this$$refs$table5 = this.$refs.table) === null || _this$$refs$table5 === void 0 || _this$$refs$table5.toggleChildRow(rowId);
       },
       getOpenChildRows: function getOpenChildRows() {
+        var _this$$refs$table6;
         var rows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-        return this.$refs.table.getOpenChildRows(rows);
+        return (_this$$refs$table6 = this.$refs.table) === null || _this$$refs$table6 === void 0 ? void 0 : _this$$refs$table6.getOpenChildRows(rows);
       },
       resetQuery: function resetQuery() {
-        this.$refs.table.resetQuery();
+        var _this$$refs$table7;
+        (_this$$refs$table7 = this.$refs.table) === null || _this$$refs$table7 === void 0 || _this$$refs$table7.resetQuery();
       },
       setCustomFilters: function setCustomFilters(params) {
+        var _this$$refs$table8;
         var sendRequest = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-        return this.$refs.table.setCustomFilters(params, sendRequest);
+        return (_this$$refs$table8 = this.$refs.table) === null || _this$$refs$table8 === void 0 ? void 0 : _this$$refs$table8.setCustomFilters(params, sendRequest);
       },
       downloadCsv: function downloadCsv() {
+        var _this$$refs$table9;
         var filename = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'table.csv';
-        return this.$refs.table.downloadCsv(filename);
+        return (_this$$refs$table9 = this.$refs.table) === null || _this$$refs$table9 === void 0 ? void 0 : _this$$refs$table9.downloadCsv(filename);
       }
     },
     computed: {
       filteredData: function filteredData() {
-        return this.$refs.table.filteredData;
+        var _this$$refs$table10;
+        return (_this$$refs$table10 = this.$refs.table) === null || _this$$refs$table10 === void 0 ? void 0 : _this$$refs$table10.filteredData;
       },
       allFilteredData: function allFilteredData() {
-        return this.$refs.table.allFilteredData;
+        var _this$$refs$table11;
+        return (_this$$refs$table11 = this.$refs.table) === null || _this$$refs$table11 === void 0 ? void 0 : _this$$refs$table11.allFilteredData;
       },
       filtersCount: function filtersCount() {
-        return this.$refs.table.filtersCount;
+        var _this$$refs$table12;
+        return (_this$$refs$table12 = this.$refs.table) === null || _this$$refs$table12 === void 0 ? void 0 : _this$$refs$table12.filtersCount;
       }
     },
     provide: function provide() {

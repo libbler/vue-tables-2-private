@@ -13,7 +13,7 @@ module.exports = function () {
     cancelToken: null,
     drawCounter: 0,
     initialRequestSent: false,
-    refs: {
+    _elRefs: {
       genericFilter: null,
       table: null,
       filters: {}
