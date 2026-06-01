@@ -2,7 +2,6 @@
 
 var clone = require('lodash.clonedeep');
 module.exports = function () {
-  this.dispatch('loading');
   var data = clone(this.tableData);
   var column = this.orderBy.column;
   data = this.search(data);
@@ -13,19 +12,24 @@ module.exports = function () {
   } else if (this.groupBy) {
     data = this.opts.sortingAlgorithm.call(this, data, this.groupBy[0]);
   }
-  if (this.vuex) {
-    if (this.count != data.length) this.commit('SET_COUNT', data.length);
-  } else {
-    this.count = data.length;
+  var serializedData = JSON.stringify(data);
+  if (this._filteredDataSignature !== serializedData) {
+    this._filteredDataSignature = serializedData;
+    this.dispatch('loading');
+    if (this.vuex) {
+      if (this.count != data.length) this.commit('SET_COUNT', data.length);
+    } else if (this.count !== data.length) {
+      this.count = data.length;
+    }
+    this.allFilteredData = JSON.parse(serializedData);
+    this.dispatch('loaded');
   }
-  this.allFilteredData = JSON.parse(JSON.stringify(data));
   var offset = this.opts.pagination.virtual ? 0 : (this.page - 1) * this.limit;
   var limit = this.opts.pagination.virtual ? this.limit * this.page : this.limit;
   var res = data.splice(offset, limit);
   if (this.groupBy) {
     return toArray(groupData(res, JSON.parse(JSON.stringify(this.groupBy))), this.groupBy);
   }
-  this.dispatch('loaded');
   return res;
 };
 function groupData(data, keys) {
