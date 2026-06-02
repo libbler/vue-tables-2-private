@@ -126,7 +126,7 @@ export default function (RLClientTable) {
                                         class={`${props.theme.field} ${props.theme.inline} ${props.theme.left} VueTables__search`}>
                                         {props.slots.beforeFilter ? props.slots.beforeFilter() : ''}
                                         {h(VtGenericFilter)}
-                                        {props.slots.afterFilter ? props.slots.afterFilter : ''}
+                                        {props.slots.afterFilter ? props.slots.afterFilter() : ''}
                                     </div> : ''}
                                 {props.slots.afterFilterWrapper ? props.slots.afterFilterWrapper() : ''}
 
@@ -135,7 +135,7 @@ export default function (RLClientTable) {
                                         class={`${props.theme.field} ${props.theme.inline} ${props.theme.right} VueTables__limit`}>
                                         {props.slots.beforeLimit ? props.slots.beforeLimit() : ''}
                                         {h(VtPerPageSelector)}
-                                        {props.slots.afterLimit ? props.slots.afterLimit : ''}
+                                        {props.slots.afterLimit ? props.slots.afterLimit() : ''}
                                     </div> : ''}
 
                                 {props.opts.pagination.dropdown && props.totalPages > 1 ?

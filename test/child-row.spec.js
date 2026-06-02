@@ -55,9 +55,10 @@ describe(suite + ': Child row', () => {
 	});
 
 	it('displays the correct toggler icon', (done) => {
+		count('.VueTables__child-row-toggler--closed', 10);
+		click(firstRowToggler);
+
 		run(function() {
-			count('.VueTables__child-row-toggler--closed', 10);
-			click(firstRowToggler);
 			count('.VueTables__child-row-toggler--closed', 9);
 			exists('table tbody tr:first-child .VueTables__child-row-toggler--open');
 		},done);
@@ -76,13 +77,14 @@ describe(suite + ': Child row', () => {
 
 		click(firstRowToggler);
 
-		count('.VueTables__child-row',1);
-
-		vm().toggleChildRow(245);
-
 		run(function() {
+			count('.VueTables__child-row',1);
+			vm().toggleChildRow(245);
+		}, () => {
+			run(function() {
 			count('.VueTables__child-row',0);
-		},done);
+			}, done);
+		});
 	});
 
 	it('can use a user-defined key as a unique id', (done)=>{
@@ -170,4 +172,3 @@ describe(suite + ': Child row', () => {
 
 
 });
-

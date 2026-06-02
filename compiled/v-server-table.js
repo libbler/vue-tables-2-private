@@ -155,6 +155,6 @@ function install(app, globalOptions) {
   }, state);
   var comp = (0, _VtServerTable["default"])(server);
   app.component("v-server-table", comp);
-  return _VtServerTable["default"];
+  return comp;
 }
 ;

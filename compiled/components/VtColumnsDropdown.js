@@ -27,8 +27,11 @@ var _default2 = exports["default"] = {
           content = (0, _vue.createVNode)("a", {
             "class": props.theme.dropdown.item,
             "href": "#",
-            "onClick": function onClick() {
-              return props.toggleColumn(column);
+            "onClick": function onClick(e) {
+              e.preventDefault();
+              props.toggleColumn(column);
+              var input = e.currentTarget.querySelector('input');
+              if (input) input.checked = !props.columns.includes(column);
             }
           }, [(0, _vue.createVNode)("input", {
             "type": "checkbox",

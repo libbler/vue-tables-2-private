@@ -1,9 +1,24 @@
 global.moment = require('moment');
 // setup JSDOM
-require('jsdom-global')()
+require('jsdom-global')(undefined, { url: 'http://localhost/' })
 // window.localStorage = require('mock-local-storage');
 // make expect available globally
-global.expect = require('expect')
+var expectModule = require('expect');
+global.expect = expectModule.expect || expectModule.default || expectModule;
+
+if (!Object.getOwnPropertyDescriptor(Array.prototype, 'wrappers')) {
+	Object.defineProperty(Array.prototype, 'wrappers', {
+		get: function() {
+			return this;
+		}
+	});
+}
+
+var originalWarn = console.warn;
+console.warn = function() {
+	if (typeof arguments[0] === 'string' && arguments[0].indexOf('[Vue warn]') === 0) return;
+	return originalWarn.apply(console, arguments);
+}
 
 global.vm = function() {
 	return wrapper.vm;
@@ -36,12 +51,12 @@ global.seeInHeadings = function(text, cellIndex) {
 
 global.exists = function(selector, scope = null) {
 	var w = scope?wrapper.find(scope):wrapper;
-	expect(w.contains(selector)).toBe(true);
+	expect(w.find(selector).exists()).toBe(true);
 }
 
 global.not_exists = function(selector, scope = null) {
 	var w = scope?wrapper.find(scope):wrapper;
-	expect(w.contains(selector)).toBe(false);
+	expect(w.find(selector).exists()).toBe(false);
 }
 
 global.count = function(selector, count) {
@@ -50,6 +65,11 @@ global.count = function(selector, count) {
 }
 
 global.setOptions = function(options) {
+	if (typeof createWrapper === 'function') {
+		safeUnmount();
+		return createWrapper(options);
+	}
+
 	wrapper.setProps({options});
 }
 
@@ -75,7 +95,8 @@ global.withVuex = function() {
 
 global.getEventData = function(event) {
 
-	return wrapper.emitted()[event][0][0];
+	var emitted = wrapper.emitted()[event];
+	return emitted && emitted[0] ? emitted[0][0] : undefined;
 
 }
 
@@ -98,7 +119,17 @@ global.enterQuery = function(key, selector, query, method, fieldType='input') {
 }
 
 global.gotoPage = function(page) {
-	click('.VuePagination ul li:nth-child('  + (page+2) + ') a');
+	click('.VuePagination ul li:nth-child('  + (page+2) + ') button');
 }
 
+global.safeUnmount = function() {
+	if (!global.wrapper) return;
 
+	try {
+		global.wrapper.unmount();
+	} catch (e) {
+		// Some legacy render functions produce null vnodes during Vue 3 teardown.
+	}
+
+	global.wrapper = null;
+}

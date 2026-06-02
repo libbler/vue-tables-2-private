@@ -1,60 +1,80 @@
 import { createApp } from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import ClientTable from '../../compiled/v-client-table'
-import {Event} from '../../compiled/index.js';
-import data from './example-data'
+import ClientTableModule from '../../compiled/v-client-table.js'
+import EventBusModule from '../../compiled/bus.js'
+import data from './example-data.js'
 import clone from 'lodash.clonedeep'
 
-global.VueEvent = Event;
+const ClientTable = ClientTableModule.default || ClientTableModule;
+const EventBus = EventBusModule.default || EventBusModule;
+EventBus.$emit = EventBus.emit.bind(EventBus);
+global.VueEvent = EventBus;
 global.suite = 'Client';
 global.source = 'client';
 
 const app = createApp({})
 
-if (withVuex()) {
-	suite+=" - Vuex";
-	app.use(Vuex);
+function createTestStore() {
+	return createStore({
+		modules: {
+			client: {
+				namespaced: true,
+				mutations: {
+					SET_CUSTOM_FILTER(state, payload) {
+						EventBus.emit(`vue-tables.client.filter::${payload.filter}`, payload.value);
+					}
+				}
+			}
+		}
+	});
 }
 
-global.run = function(cb, done, timeout = 0) {
+if (withVuex()) {
+	suite+=" - Vuex";
+}
+
+function runLater(cb, done, timeout = 0) {
 	setTimeout(()=>{
 		cb();
 		done();
 	},timeout);
 }
 
+global.run = runLater;
+
 beforeEach(function() {
+	global.run = runLater;
 	createWrapper();
 });
 
 afterEach(function() {
-	wrapper.destroy();
-	global.wrapper = null;
+	safeUnmount();
 })
 
 global.createWrapper = function(options = {debounce:0, resizableColumns:false}, columns = null, slots = {}, dataOverride = null, scopedSlots = {}, events = {}) {
 
+	if (EventBus.all && EventBus.all.clear) EventBus.all.clear();
+
 	var d = clone(data);
 
 	let params = {
-		propsData:{
+		props:{
 			name:'client',
 			columns:columns?columns:['code','name','uri'],
 			data: dataOverride?dataOverride:d,
-			options,
-			listeners:events
+			options
 		},
-
-		slots,
-		scopedSlots
+		slots: Object.assign({}, slots, scopedSlots),
+		global: {
+			plugins: withVuex() ? [createTestStore()] : []
+		},
+		attrs: events
 	};
 
-	if (withVuex()) {
-		params.store =  new Vuex.Store();
-	}
-
-	global.wrapper = mount(ClientTable.install(app,{},withVuex()), params);
+	global.wrapper = mount(ClientTable(app,{}), params);
+	global.wrapper.destroy = global.wrapper.unmount.bind(global.wrapper);
+	global.wrapper.vm.$destroy = global.wrapper.unmount.bind(global.wrapper);
 
 	return wrapper;
 }

@@ -24,6 +24,9 @@ module.exports = function () {
     this.allFilteredData = JSON.parse(serializedData);
     this.dispatch('loaded');
   }
+  if (this.page > this.totalPages) {
+    this.setPage(this.totalPages);
+  }
   var offset = this.opts.pagination.virtual ? 0 : (this.page - 1) * this.limit;
   var limit = this.opts.pagination.virtual ? this.limit * this.page : this.limit;
   var res = data.splice(offset, limit);

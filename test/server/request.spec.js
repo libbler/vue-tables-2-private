@@ -58,7 +58,6 @@ describe(suite + ': Request', () => {
 
 					setTimeout(()=>{
 						resolve(response);
-						done();
 					},100);
 
 				});
@@ -68,6 +67,7 @@ describe(suite + ': Request', () => {
 
 		vm().$refs.table.getData(true).then((res)=>{
 			expect(res).toEqual(response);
+			done();
 		});
 
 	});
@@ -100,7 +100,7 @@ describe(suite + ': Request', () => {
 
 		expect(request.config.url).toEqual('get-data');
 
-		vm().url = '/new-url';
+		wrapper.setProps({url:'/new-url'});
 
 		setTimeout(()=>{
 			var request = moxios.requests.mostRecent();

@@ -20,7 +20,12 @@ export default {
                 var cols = props.origColumns.map(column => {
                     content = <a class={props.theme.dropdown.item}
                                  href="#"
-                                 onClick={() => props.toggleColumn(column)}>
+                                 onClick={e => {
+                                     e.preventDefault();
+                                     props.toggleColumn(column);
+                                     const input = e.currentTarget.querySelector('input');
+                                     if (input) input.checked = !props.columns.includes(column);
+                                 }}>
                         <input type="checkbox" value={column}
                                disabled={props.onlyColumn(column)}
                                checked={props.columns.includes(column)}/>

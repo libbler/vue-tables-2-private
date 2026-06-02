@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createApp } from 'vue'
+import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import ServerTable from '../../compiled/v-server-table.js'
+import ServerTableModule from '../../compiled/v-server-table.js'
 
 global.suite = 'Server';
 global.source = 'server';
 global.axios = require('axios');
 global.moxios = require('moxios');
 
-import data from './example-data';
+import data from './example-data.js';
 
-if (withVuex()) {
-	Vue.use(Vuex);
-	suite+=' - Vuex';
-}
+const ServerTable = ServerTableModule.default || ServerTableModule;
+
+if (withVuex()) suite+=' - Vuex';
 
 beforeEach(()=>{
+	global.run = runLater;
 	moxios.install(axios);
 
 	moxios.stubRequest(/get\-data.*/, {
@@ -32,15 +32,17 @@ beforeEach(()=>{
 
 afterEach(()=>{
 	moxios.uninstall(axios);
-	wrapper.destroy();
+	safeUnmount();
 });
 
-global.run = function(cb, done, timeout = 0) {
+function runLater(cb, done, timeout = 0) {
 	moxios.wait(()=>{
 		cb();
 		done();
 	}, timeout);
 }
+
+global.run = runLater;
 
 global.requestHas = function(key, value) {
 	var request = moxios.requests.mostRecent();
@@ -51,21 +53,20 @@ global.requestHas = function(key, value) {
 global.createWrapper = function(options = {}, columns = null, slots = {}) {
 
 	var params = {
-		propsData:{
+		props:{
 			name:'server',
 			columns:columns?columns:['code','name','uri'],
 			url:'get-data',
 			options
 		},
-		slots
+		slots,
+		global: {
+			plugins: withVuex() ? [createStore({})] : []
+		}
 	};
 
-	if (withVuex()) {
-		params.store = new Vuex.Store();
-	}
-
-	var servertable = ServerTable.install(Vue, {} ,withVuex());
-
-	global.wrapper = mount(servertable, params);
+	global.wrapper = mount(ServerTable(createApp({}), {}), params);
+	global.wrapper.destroy = global.wrapper.unmount.bind(global.wrapper);
+	global.wrapper.vm.$destroy = global.wrapper.unmount.bind(global.wrapper);
 
 }

@@ -5,7 +5,7 @@ function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default":
 module.exports = function (value, h) {
   if (typeof value !== 'string') return '';
   if (typeof this.$parent.$slots["h__".concat(value)] !== 'undefined') {
-    return this.$parent.$slots["h__".concat(value)];
+    return this.$parent.$slots["h__".concat(value)]();
   }
   var derivedHeading = (0, _ucfirst["default"])(value.split("_").join(" "));
   if (!this.opts.headings.hasOwnProperty(value)) return derivedHeading;

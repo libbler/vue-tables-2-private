@@ -86,6 +86,8 @@ function install(app, globalOptions) {
         if (_this.page > _this.totalPages) {
           _this.setPage(_this.totalPages);
         }
+      }, {
+        deep: true
       });
     },
     model: {

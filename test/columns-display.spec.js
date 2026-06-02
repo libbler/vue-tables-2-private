@@ -43,7 +43,7 @@ describe(suite + ': Columns Display', () => {
 
     });
 
-    it('can toggle columns', ()=>{
+    it('can toggle columns', (done)=>{
         var els = getCheckboxes();
 
         see('Code','table thead tr:first-child th:first-child');
@@ -59,14 +59,18 @@ describe(suite + ': Columns Display', () => {
             expect(el.element.checked).toBe(true);
         });
 
-        not_see('Code','table thead tr:first-child th:first-child');
-        see('Name','table thead tr:first-child th:first-child');
-        count('table thead tr:first-child th',2);
+        run(function() {
+            not_see('Code','table thead tr:first-child th:first-child');
+            see('Name','table thead tr:first-child th:first-child');
+            count('table thead tr:first-child th',2);
 
-        toggleColumn(1);
+            toggleColumn(1);
 
-        see('Code','table thead tr:first-child th:first-child');
-        count('table thead tr:first-child th',3);
+            run(function() {
+                see('Code','table thead tr:first-child th:first-child');
+                count('table thead tr:first-child th',3);
+            }, done);
+        }, () => {});
 
     });
 
@@ -89,19 +93,23 @@ describe(suite + ': Columns Display', () => {
 
     })
 
-    it('disables the checked checkbox when only one column remains', () => {
+    it('disables the checked checkbox when only one column remains', (done) => {
         toggleColumn(1);
         toggleColumn(2);
 
-        var els = getCheckboxes();
+        run(function() {
+            var els = getCheckboxes();
 
-        expect(els[2].element.disabled).toBe(true);
+            expect(els[2].element.disabled).toBe(true);
 
-        els[2].element.disabled = false;
+            els[2].element.disabled = false;
 
-        toggleColumn(3);
+            toggleColumn(3);
 
-        count('table thead tr:first-child th',1);
+            run(function() {
+                count('table thead tr:first-child th',1);
+            }, done);
+        }, () => {});
 
     });
 

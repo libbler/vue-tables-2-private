@@ -36,7 +36,7 @@ export default {
                             <div>{filter}{props.slots[`filter__${column}`]()}</div> : props.slots[`filter__${column}`]();
                     }
 
-                    filters.push(<th class={props.columnClass(column)}>
+                    filters.push(<th key={column} class={props.columnClass(column)}>
                         {!!filter ? <div class="VueTables__column-filter"
                                          class={'VueTables__' + column + '-filter-wrapper'}>
                             {filter}

@@ -10,9 +10,14 @@ module.exports = function () {
     return rows.includes(row);
   }) : this.openChildRows;
   if (!Rows.length) return [];
-  return this.$parent.$refs.vt_table.$refs.vt_table_body.$children[0].$children.filter(function (child) {
-    return child.$options.name === 'VtChildRow' && Rows.includes(child.$children[0].$children[0].data[_this.opts.uniqueKey]);
-  }).map(function (child) {
-    return child.$children[0].$children[0];
+  var data = this.source === 'client' ? this.filteredData : this.tableData;
+  return Rows.map(function (rowId) {
+    return data.find(function (row) {
+      return row[_this.opts.uniqueKey] === rowId;
+    });
+  }).filter(Boolean).map(function (row) {
+    return {
+      data: row
+    };
   });
 };

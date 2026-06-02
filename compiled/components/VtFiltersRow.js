@@ -40,6 +40,7 @@ var _default2 = exports["default"] = {
             filter = filter ? (0, _vue.createVNode)("div", null, [filter, props.slots["filter__".concat(column)]()]) : props.slots["filter__".concat(column)]();
           }
           filters.push((0, _vue.createVNode)("th", {
+            "key": column,
             "class": props.columnClass(column)
           }, [!!filter ? (0, _vue.createVNode)("div", {
             "class": ["VueTables__column-filter", 'VueTables__' + column + '-filter-wrapper']
