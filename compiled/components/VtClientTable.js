@@ -99,16 +99,16 @@ function _default2(RLClientTable) {
     },
     computed: {
       filteredData: function filteredData() {
-        var _this$$refs$table10;
-        return (_this$$refs$table10 = this.$refs.table) === null || _this$$refs$table10 === void 0 ? void 0 : _this$$refs$table10.filteredData;
+        var _this$$refs$table0;
+        return (_this$$refs$table0 = this.$refs.table) === null || _this$$refs$table0 === void 0 ? void 0 : _this$$refs$table0.filteredData;
       },
       allFilteredData: function allFilteredData() {
-        var _this$$refs$table11;
-        return (_this$$refs$table11 = this.$refs.table) === null || _this$$refs$table11 === void 0 ? void 0 : _this$$refs$table11.allFilteredData;
+        var _this$$refs$table1;
+        return (_this$$refs$table1 = this.$refs.table) === null || _this$$refs$table1 === void 0 ? void 0 : _this$$refs$table1.allFilteredData;
       },
       filtersCount: function filtersCount() {
-        var _this$$refs$table12;
-        return (_this$$refs$table12 = this.$refs.table) === null || _this$$refs$table12 === void 0 ? void 0 : _this$$refs$table12.filtersCount;
+        var _this$$refs$table10;
+        return (_this$$refs$table10 = this.$refs.table) === null || _this$$refs$table10 === void 0 ? void 0 : _this$$refs$table10.filtersCount;
       }
     },
     provide: function provide() {
