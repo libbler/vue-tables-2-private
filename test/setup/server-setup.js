@@ -2,28 +2,38 @@ import { createApp } from 'vue'
 import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
 import ServerTableModule from '../../compiled/v-server-table.js'
+import sinon from 'sinon'
 
 global.suite = 'Server';
 global.source = 'server';
 global.axios = require('axios');
-global.moxios = require('moxios');
 
 import data from './example-data.js';
 
 const ServerTable = ServerTableModule.default || ServerTableModule;
+let axiosGetStub;
+let latestRequest;
 
 if (withVuex()) suite+=' - Vuex';
 
 beforeEach(()=>{
 	global.run = runLater;
-	moxios.install(axios);
+	latestRequest = null;
+	axiosGetStub = sinon.stub(axios, 'get').callsFake((url, config = {}) => {
+		latestRequest = {
+			config: {
+				url,
+				...config
+			}
+		};
 
-	moxios.stubRequest(/get\-data.*/, {
-		status:200,
-		response:{
-			data:data.slice(0,10),
-			count:data.length
-		}
+		return Promise.resolve({
+			status: 200,
+			data: {
+				data:data.slice(0,10),
+				count:data.length
+			}
+		});
 	});
 
 	createWrapper();
@@ -31,21 +41,24 @@ beforeEach(()=>{
 });
 
 afterEach(()=>{
-	moxios.uninstall(axios);
+	axiosGetStub.restore();
 	safeUnmount();
 });
 
 function runLater(cb, done, timeout = 0) {
-	moxios.wait(()=>{
+	setTimeout(()=>{
 		cb();
 		done();
 	}, timeout);
 }
 
 global.run = runLater;
+global.latestRequest = function() {
+	return latestRequest;
+};
 
 global.requestHas = function(key, value) {
-	var request = moxios.requests.mostRecent();
+	var request = global.latestRequest();
 	expect(request.config.params[key]).toEqual(value);
 }
 

@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import ClientTableModule from '../../compiled/v-client-table.js'
 import EventBusModule from '../../compiled/bus.js'
 import data from './example-data.js'
-import clone from 'lodash.clonedeep'
+import cloneDeep from 'lodash-es/cloneDeep'
 
 const ClientTable = ClientTableModule.default || ClientTableModule;
 const EventBus = EventBusModule.default || EventBusModule;
@@ -56,7 +56,7 @@ global.createWrapper = function(options = {debounce:0, resizableColumns:false}, 
 
 	if (EventBus.all && EventBus.all.clear) EventBus.all.clear();
 
-	var d = clone(data);
+	var d = cloneDeep(data);
 
 	let params = {
 		props:{
