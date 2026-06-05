@@ -30,8 +30,6 @@ var _default2 = exports["default"] = {
             "onClick": function onClick(e) {
               e.preventDefault();
               props.toggleColumn(column);
-              var input = e.currentTarget.querySelector('input');
-              if (input) input.checked = !props.columns.includes(column);
             }
           }, [(0, _vue.createVNode)("input", {
             "type": "checkbox",

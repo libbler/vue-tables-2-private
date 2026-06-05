@@ -23,8 +23,6 @@ export default {
                                  onClick={e => {
                                      e.preventDefault();
                                      props.toggleColumn(column);
-                                     const input = e.currentTarget.querySelector('input');
-                                     if (input) input.checked = !props.columns.includes(column);
                                  }}>
                         <input type="checkbox" value={column}
                                disabled={props.onlyColumn(column)}

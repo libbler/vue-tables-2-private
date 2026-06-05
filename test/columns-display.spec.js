@@ -44,22 +44,20 @@ describe(suite + ': Columns Display', () => {
     });
 
     it('can toggle columns', (done)=>{
-        var els = getCheckboxes();
-
         see('Code','table thead tr:first-child th:first-child');
         count('table thead tr:first-child th',3);
 
         toggleColumn(1);
 
-        var first = els.shift();
-
-        expect(first.element.checked).toBe(false);
-
-        els.forEach(el => {
-            expect(el.element.checked).toBe(true);
-        });
-
         run(function() {
+            var first = getCheckboxes().shift();
+
+            expect(first.element.checked).toBe(false);
+
+            getCheckboxes().slice(1).forEach(el => {
+                expect(el.element.checked).toBe(true);
+            });
+
             not_see('Code','table thead tr:first-child th:first-child');
             see('Name','table thead tr:first-child th:first-child');
             count('table thead tr:first-child th',2);
