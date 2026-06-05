@@ -30,7 +30,7 @@ var _default2 = exports["default"] = {
           "name": "page",
           "ref": "page",
           "value": props.page,
-          "on-change": function onChange(e) {
+          "onChange": function onChange(e) {
             return props.setPage(e.target.value);
           },
           "id": id

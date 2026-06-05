@@ -22,6 +22,10 @@ var _default2 = exports["default"] = {
     VtGroupRow: _VtGroupRow["default"]
   },
   render: function render() {
+    var getRowKey = function getRowKey(props, row) {
+      var prefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'row';
+      return "".concat(prefix, "-").concat(row[props.uniqueRowId]);
+    };
     return (0, _vue.h)(_RLTableBody["default"], {}, {
       "default": function _default(props) {
         var rows = [];
@@ -39,12 +43,14 @@ var _default2 = exports["default"] = {
                   group.data.forEach(function (row, index) {
                     rows.push((0, _vue.h)(_VtTableRow["default"], {
                       row: row,
-                      index: props.initialIndex + index + 1
+                      index: props.initialIndex + index + 1,
+                      key: getRowKey(props, row)
                     }));
                     if (props.hasChildRow && props.openChildRows.includes(row[props.uniqueRowId])) {
                       rows.push((0, _vue.h)(_VtChildRow["default"], {
                         row: row,
-                        index: props.initialIndex + index + 1
+                        index: props.initialIndex + index + 1,
+                        key: getRowKey(props, row, 'child-row')
                       }));
                     }
                   });
@@ -62,12 +68,14 @@ var _default2 = exports["default"] = {
           props.data.forEach(function (row, index) {
             rows.push((0, _vue.h)(_VtTableRow["default"], {
               row: row,
-              index: props.initialIndex + index + 1
+              index: props.initialIndex + index + 1,
+              key: getRowKey(props, row)
             }));
             if (props.hasChildRow && props.openChildRows.includes(row[props.uniqueRowId])) {
               rows.push((0, _vue.h)(_VtChildRow["default"], {
                 row: row,
-                index: props.initialIndex + index + 1
+                index: props.initialIndex + index + 1,
+                key: getRowKey(props, row, 'child-row')
               }));
             }
           });

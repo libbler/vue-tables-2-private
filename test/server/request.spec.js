@@ -10,7 +10,7 @@ describe(suite + ': Request', () => {
 
 	it('sends a request when initialized to the URL defined by the consumer with the right parameters', ()=>{
 
-		var request = moxios.requests.mostRecent();
+		var request = latestRequest();
 
 		expect(request.config.url).toEqual(vm().url);
 
@@ -33,7 +33,7 @@ describe(suite + ': Request', () => {
 
 			done();
 
-			var request = moxios.requests.mostRecent();
+			var request = latestRequest();
 
 			expect(request.config.params).toEqual(
 			{
@@ -58,7 +58,6 @@ describe(suite + ': Request', () => {
 
 					setTimeout(()=>{
 						resolve(response);
-						done();
 					},100);
 
 				});
@@ -68,6 +67,7 @@ describe(suite + ': Request', () => {
 
 		vm().$refs.table.getData(true).then((res)=>{
 			expect(res).toEqual(response);
+			done();
 		});
 
 	});
@@ -85,7 +85,7 @@ describe(suite + ': Request', () => {
 
 			done();
 
-			var request = moxios.requests.mostRecent();
+			var request = latestRequest();
 
 			expect(request.config.params).toEqual({data:initialParams});
 
@@ -96,14 +96,14 @@ describe(suite + ': Request', () => {
 
 	it('refreshes the table when the URL changes (regression test for #510)', (done)=>{
 
-		var request = moxios.requests.mostRecent();
+		var request = latestRequest();
 
 		expect(request.config.url).toEqual('get-data');
 
-		vm().url = '/new-url';
+		wrapper.setProps({url:'/new-url'});
 
 		setTimeout(()=>{
-			var request = moxios.requests.mostRecent();
+			var request = latestRequest();
 			expect(request.config.url).toEqual('/new-url');
 			done();
 		},100);

@@ -1,8 +1,9 @@
 "use strict";
 
-var clone = require('lodash.clonedeep');
+var _cloneDeep = _interopRequireDefault(require("lodash-es/cloneDeep"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 module.exports = function () {
-  var data = clone(this.tableData);
+  var data = (0, _cloneDeep["default"])(this.tableData);
   var column = this.orderBy.column;
   data = this.search(data);
   if (column) {
@@ -23,6 +24,9 @@ module.exports = function () {
     }
     this.allFilteredData = JSON.parse(serializedData);
     this.dispatch('loaded');
+  }
+  if (this.page > this.totalPages) {
+    this.setPage(this.totalPages);
   }
   var offset = this.opts.pagination.virtual ? 0 : (this.page - 1) * this.limit;
   var limit = this.opts.pagination.virtual ? this.limit * this.page : this.limit;

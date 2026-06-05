@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+var _vue = require("vue");
 var getThStyle = require('../../mixins/get-th-style');
 var _default = exports["default"] = {
   name: 'RLTableHeading',
@@ -18,7 +19,7 @@ var _default = exports["default"] = {
   },
   inject: ['opts', 'theme', 'sortableClass', 'getHeadingTooltip', 'getHeading', 'orderByColumn', 'componentsOverride', 'tabIndex'],
   mixins: [getThStyle],
-  render: function render(h) {
+  render: function render() {
     var _this2 = this;
     return this.$slots["default"]({
       opts: this.opts(),
@@ -43,7 +44,7 @@ var _default = exports["default"] = {
       spanAttrs: {
         title: this.getHeadingTooltip(this.column)
       },
-      heading: this.getHeading(this.column, h),
+      heading: this.getHeading(this.column, _vue.h),
       override: this.componentsOverride.tableHeading
     });
   },

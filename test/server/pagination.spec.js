@@ -37,11 +37,13 @@ describe(suite + ' :Pagination', ()=>{
 			}
 		});
 
-		select('.dropdown-pagination', "2");
-
 		run(()=>{
+			select('.dropdown-pagination', "2");
+		}, () => {
+			run(()=>{
 			requestHas('page',2);
-		},done);
+			},done);
+		});
 	});
 
 

@@ -1,6 +1,7 @@
 "use strict";
 
 module.exports = function (data, customFilters, customQueries) {
+  if (!customFilters.length) return data;
   var passing;
   return data.filter(function (row) {
     passing = true;

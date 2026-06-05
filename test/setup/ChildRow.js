@@ -1,5 +1,7 @@
+import { h } from 'vue';
+
 export default {
-		render(h) {
+		render() {
 			return h('div',[
 				'My Child Row ' + this.data.code
 			])

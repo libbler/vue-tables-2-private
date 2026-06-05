@@ -39,7 +39,7 @@ module.exports = function (data, e) {
   var dateFormat;
   var filterByDate;
   var isListFilter;
-  var data = filterByCustomFilters(data, this.opts.customFilters, this.customQueries);
+  var data = filterByCustomFilters.call(this, data, this.opts.customFilters, this.customQueries);
   if (!totalQueries) return data;
   return data.filter(function (row, index) {
     found = 0;

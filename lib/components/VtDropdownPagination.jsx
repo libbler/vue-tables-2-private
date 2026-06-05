@@ -22,7 +22,7 @@ export default {
                              name="page"
                              ref="page"
                              value={props.page}
-                             on-change={e => props.setPage(e.target.value)}
+                             onChange={e => props.setPage(e.target.value)}
                              id={id}
                 >
                     {pages}

@@ -1,29 +1,39 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createApp } from 'vue'
+import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import ServerTable from '../../compiled/v-server-table.js'
+import ServerTableModule from '../../compiled/v-server-table.js'
+import sinon from 'sinon'
 
 global.suite = 'Server';
 global.source = 'server';
 global.axios = require('axios');
-global.moxios = require('moxios');
 
-import data from './example-data';
+import data from './example-data.js';
 
-if (withVuex()) {
-	Vue.use(Vuex);
-	suite+=' - Vuex';
-}
+const ServerTable = ServerTableModule.default || ServerTableModule;
+let axiosGetStub;
+let latestRequest;
+
+if (withVuex()) suite+=' - Vuex';
 
 beforeEach(()=>{
-	moxios.install(axios);
+	global.run = runLater;
+	latestRequest = null;
+	axiosGetStub = sinon.stub(axios, 'get').callsFake((url, config = {}) => {
+		latestRequest = {
+			config: {
+				url,
+				...config
+			}
+		};
 
-	moxios.stubRequest(/get\-data.*/, {
-		status:200,
-		response:{
-			data:data.slice(0,10),
-			count:data.length
-		}
+		return Promise.resolve({
+			status: 200,
+			data: {
+				data:data.slice(0,10),
+				count:data.length
+			}
+		});
 	});
 
 	createWrapper();
@@ -31,19 +41,24 @@ beforeEach(()=>{
 });
 
 afterEach(()=>{
-	moxios.uninstall(axios);
-	wrapper.destroy();
+	axiosGetStub.restore();
+	safeUnmount();
 });
 
-global.run = function(cb, done, timeout = 0) {
-	moxios.wait(()=>{
+function runLater(cb, done, timeout = 0) {
+	setTimeout(()=>{
 		cb();
 		done();
 	}, timeout);
 }
 
+global.run = runLater;
+global.latestRequest = function() {
+	return latestRequest;
+};
+
 global.requestHas = function(key, value) {
-	var request = moxios.requests.mostRecent();
+	var request = global.latestRequest();
 	expect(request.config.params[key]).toEqual(value);
 }
 
@@ -51,21 +66,20 @@ global.requestHas = function(key, value) {
 global.createWrapper = function(options = {}, columns = null, slots = {}) {
 
 	var params = {
-		propsData:{
+		props:{
 			name:'server',
 			columns:columns?columns:['code','name','uri'],
 			url:'get-data',
 			options
 		},
-		slots
+		slots,
+		global: {
+			plugins: withVuex() ? [createStore({})] : []
+		}
 	};
 
-	if (withVuex()) {
-		params.store = new Vuex.Store();
-	}
-
-	var servertable = ServerTable.install(Vue, {} ,withVuex());
-
-	global.wrapper = mount(servertable, params);
+	global.wrapper = mount(ServerTable(createApp({}), {}), params);
+	global.wrapper.destroy = global.wrapper.unmount.bind(global.wrapper);
+	global.wrapper.vm.$destroy = global.wrapper.unmount.bind(global.wrapper);
 
 }
