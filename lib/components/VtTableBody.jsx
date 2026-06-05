@@ -10,6 +10,8 @@ export default {
     name: 'VtTableBody',
     components: {RLTableBody, VtNoResultsRow, VtTableRow, VtChildRow, VtGroupRow},
     render() {
+        const getRowKey = (props, row, prefix = 'row') => `${prefix}-${row[props.uniqueRowId]}`;
+
         return h(RLTableBody, {}, {
             default: function (props) {
                 var rows = [];
@@ -25,10 +27,16 @@ export default {
                             if (level === props.groupBy.length) {
                                 if (!props.canToggleGroups || !props.collapsedGroups.includes(group.value)) {
                                     group.data.forEach((row, index) => {
-                                        rows.push(h(VtTableRow, {row, index: props.initialIndex + index + 1}))
+                                        rows.push(h(VtTableRow, {
+                                            row,
+                                            index: props.initialIndex + index + 1,
+                                            key: getRowKey(props, row)
+                                        }))
                                         if (props.hasChildRow && props.openChildRows.includes(row[props.uniqueRowId])) {
                                             rows.push(h(VtChildRow, {
-                                                row, index: props.initialIndex + index + 1
+                                                row,
+                                                index: props.initialIndex + index + 1,
+                                                key: getRowKey(props, row, 'child-row')
                                             }))
                                         }
                                     })
@@ -45,11 +53,17 @@ export default {
                     rows = addRows(props.data);
                 } else {
                     props.data.forEach((row, index) => {
-                        rows.push(h(VtTableRow, {row, index: props.initialIndex + index + 1}))
+                        rows.push(h(VtTableRow, {
+                            row,
+                            index: props.initialIndex + index + 1,
+                            key: getRowKey(props, row)
+                        }))
                         if (props.hasChildRow && props.openChildRows.includes(row[props.uniqueRowId])) {
                             rows.push(
                                 h(VtChildRow, {
-                                    row, index: props.initialIndex + index + 1
+                                    row,
+                                    index: props.initialIndex + index + 1,
+                                    key: getRowKey(props, row, 'child-row')
                                 })
                             )
                         }
@@ -68,4 +82,3 @@ export default {
         })
     }
 }
-

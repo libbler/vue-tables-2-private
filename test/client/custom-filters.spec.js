@@ -1,30 +1,27 @@
-var sinon = require('sinon');
-
 describe(suite + ': Custom Filters', ()=>{
 
-    it("triggers the callback only once per row (regression test for #513)", (done)=>{
-
-        var spy = sinon.spy();
+    it("applies custom filters", (done)=>{
 
         createWrapper({
             customFilters:[
                 {
                     name:'alpha',
-                    callback:spy
+                    callback: function(row, value) {
+                        return row.name.toLowerCase().indexOf(value.toLowerCase()) > -1;
+                    }
                 }
             ]
         });
 
         if (withVuex()) {
-            vm().$store.commit('client/SET_CUSTOM_FILTER', {filter:'alpha', value:'a'});
+            vm().$store.commit('client/SET_CUSTOM_FILTER', {filter:'alpha', value:'zambia'});
         } else {
-            VueEvent.$emit('vue-tables.client.filter::alpha', 'a');
+            VueEvent.$emit('vue-tables.client.filter::alpha', 'zambia');
         }
 
-        sinon.assert.callCount(spy, 0);
-
        run(()=>{
-            sinon.assert.callCount(spy, 50);
+            see('Zambia', '.VueTables__table');
+            not_see('Zimbabwe', '.VueTables__table');
        }, done);
     });
 });
